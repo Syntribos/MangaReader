@@ -14,7 +14,7 @@ namespace MangaReader.MainProject
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
-            var path = @"C:\Users\joshr\Desktop\TestData";
+            var path = @"C:\Users\Josh\Desktop\Bu Ke Jie nabokunosubetewo 4";
             var mangaInfo = new MangaInfo(path, Directory.GetFiles(path));
             var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo);
             var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
