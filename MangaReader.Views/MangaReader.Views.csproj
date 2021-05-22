@@ -46,7 +46,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChapterScrubberView.xaml.cs">
+      <DependentUpon>ChapterScrubberView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelLocator.cs" />
+    <Page Include="ChapterScrubberView.xaml" />
     <Page Include="MangaRendererView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

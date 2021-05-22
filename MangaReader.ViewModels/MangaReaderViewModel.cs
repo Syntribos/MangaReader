@@ -22,15 +22,18 @@ namespace MangaReader.ViewModels
 
         public int CurrentPageNumber
         {
-            get => _currentPageNumber;
+            get => _currentPageNumber + 1;
 
             set
             {
                 _currentPageNumber = value;
-                OnPropertyChanged(nameof(CurrentPageNumber));
-                OnPropertyChanged(nameof(CurrentPage));
+                UpdatePageInfo();
             }
         }
+
+        public string ChapterProgress => $"{CurrentPageNumber}/{NumberOfPages}";
+
+        public int NumberOfPages => ChapterInfo.PageCount;
 
         public string CurrentPage => ChapterInfo.GetPagePath(_currentPageNumber);
 
@@ -39,19 +42,26 @@ namespace MangaReader.ViewModels
         public void GoToNextPage()
         {
             _currentPageNumber += 1;
-            OnPropertyChanged(nameof(CurrentPage));
+            UpdatePageInfo();
         }
         
         public void GoToPreviousPage()
         {
             _currentPageNumber -= 1;
-            OnPropertyChanged(nameof(CurrentPage));
+            UpdatePageInfo();
         }
 
         public void GoToPage(int pageNumber)
         {
             _currentPageNumber = pageNumber;
+            UpdatePageInfo();
+        }
+
+        private void UpdatePageInfo()
+        {
+            OnPropertyChanged(nameof(CurrentPageNumber));
             OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(ChapterProgress));
         }
 
         [NotifyPropertyChangedInvocator]
