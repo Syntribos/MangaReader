@@ -1,4 +1,4 @@
-﻿<Window x:Class="MangaReader.Views.MainWindow"
+﻿<Window x:Class="MangaReader.Views.MangaReaderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MangaReader.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="525" Width="350"
-        DataContext="clr-namespace:MangaReader.ViewModels.MangaReaderViewModel">
+        d:DataContext="{d:DesignInstance }">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
