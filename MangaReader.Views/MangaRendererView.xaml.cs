@@ -1,4 +1,5 @@
-﻿using MangaReader.ViewModels;
+﻿using System.Windows;
+using MangaReader.ViewModels;
 
 namespace MangaReader.Views
 {
@@ -7,10 +8,23 @@ namespace MangaReader.Views
     /// </summary>
     public partial class MangaReaderView
     {
+        private readonly MangaReaderViewModel _mangaReaderViewModel;
+        
         public MangaReaderView(MangaReaderViewModel mangaReaderViewModel)
         {
+            _mangaReaderViewModel = mangaReaderViewModel;
             DataContext = mangaReaderViewModel;
             InitializeComponent();
+        }
+
+        private void LeftButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _mangaReaderViewModel.GoToNextPage();
+        }
+        
+        private void RightButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _mangaReaderViewModel.GoToPreviousPage();
         }
     }
 }

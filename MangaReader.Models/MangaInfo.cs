@@ -8,11 +8,8 @@ namespace MangaReader.Models
     {
         public MangaInfo(string basePath, string[] files)
         {
-            BasePath = basePath;
             Pages = files;
         }
-        
-        public string BasePath { get; }
         
         public string[] Pages { get; }
         
@@ -22,6 +19,11 @@ namespace MangaReader.Models
             {
                 return Pages.Length;
             }
+        }
+
+        public string GetPagePath(int pageNumber)
+        {
+            return Pages[pageNumber];
         }
     }
 }
