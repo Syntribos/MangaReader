@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using MangaReader.Models;
 using MangaReader.Views;
 using MangaReader.ViewModels;
 
-namespace MangaReader.MangaReader
+namespace MangaReader.MainProject
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -16,13 +14,12 @@ namespace MangaReader.MangaReader
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
-            var path = @"C:\Users\Josh\Desktop\Images";
+            var path = @"C:\Users\Josh\Desktop\Bu Ke Jie nabokunosubetewo 4";
             var mangaInfo = new MangaInfo(path, Directory.GetFiles(path));
-            var mrvw = new MangaReaderViewModel(mangaInfo);
-            var wnd = new MangaReaderView(mrvw) {Title = "MangaReader"};
-            // Do stuff here, e.g. to the window
-            // Show the window
-            wnd.Show();
+            var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo);
+            var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
+
+            mangaReaderView.Show();
         }
     }
 }
