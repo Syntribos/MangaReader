@@ -6,8 +6,8 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{67E59B44-922A-4BCF-BE15-070D8F41504D}</ProjectGuid>
         <OutputType>WinExe</OutputType>
-        <RootNamespace>MangaReader.Main</RootNamespace>
-        <AssemblyName>MangaReader.Main</AssemblyName>
+        <RootNamespace>MangaReader.MangaReader</RootNamespace>
+        <AssemblyName>MangaReader.MangaReader</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -82,9 +82,17 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj">
+        <Project>{d02203bd-2e53-4a9c-96cf-339c7844e615}</Project>
+        <Name>MangaReader.Models</Name>
+      </ProjectReference>
       <ProjectReference Include="..\MangaReader.ViewModels\MangaReader.ViewModels.csproj">
         <Project>{d67fd059-aa33-42c5-b9b2-5cf288135897}</Project>
         <Name>MangaReader.ViewModels</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\MangaReader.Views\MangaReader.Views.csproj">
+        <Project>{5d3419ee-9246-42e5-82ae-89359935624a}</Project>
+        <Name>MangaReader.Views</Name>
       </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

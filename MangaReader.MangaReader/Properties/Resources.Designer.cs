@@ -45,7 +45,7 @@ namespace MangaReader.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("MangaReader.Main.Properties.Resources",
+                        new global::System.Resources.ResourceManager("MangaReader.MangaReader.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

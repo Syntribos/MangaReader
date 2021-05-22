@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Main", "MangaReader.Main\MangaReader.Main.csproj", "{67E59B44-922A-4BCF-BE15-070D8F41504D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.MangaReader", "MangaReader.MangaReader\MangaReader.MangaReader.csproj", "{67E59B44-922A-4BCF-BE15-070D8F41504D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Views", "MangaReader.Views\MangaReader.Views.csproj", "{5D3419EE-9246-42E5-82AE-89359935624A}"
 EndProject
