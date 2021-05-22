@@ -1,12 +1,15 @@
-﻿namespace MangaReader.Views
+﻿using MangaReader.ViewModels;
+
+namespace MangaReader.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MangaReaderView
     {
-        public MainWindow()
+        public MangaReaderView(MangaReaderViewModel mangaReaderViewModel)
         {
+            DataContext = mangaReaderViewModel;
             InitializeComponent();
         }
     }
