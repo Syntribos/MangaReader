@@ -41,6 +41,12 @@
         <Compile Include="MangaReaderViewModel.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj">
+        <Project>{d02203bd-2e53-4a9c-96cf-339c7844e615}</Project>
+        <Name>MangaReader.Models</Name>
+      </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

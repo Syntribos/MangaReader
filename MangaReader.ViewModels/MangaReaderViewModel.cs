@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MangaReader.Models;
 
 namespace MangaReader.ViewModels
 {
     public class MangaReaderViewModel
     {
-        public MangaReaderViewModel(string basePath, IEnumerable<string> pages)
+        public MangaReaderViewModel(MangaInfo mangaInfo)
         {
-            CurrentMangaPage = basePath + pages.First();
+            ChapterInfo = mangaInfo;
         }
 
-        public string CurrentMangaPage { get; private set; }
+        public MangaInfo ChapterInfo { get; }
     }
 }

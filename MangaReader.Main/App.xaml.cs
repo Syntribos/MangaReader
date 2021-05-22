@@ -1,4 +1,6 @@
-﻿namespace MangaReader
+﻿using MangaReader.ViewModels;
+
+namespace MangaReader.Main
 {
     /// <summary>
     /// Interaction logic for App.xaml
