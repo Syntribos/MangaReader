@@ -1,4 +1,4 @@
-﻿namespace MangaReader
+﻿namespace MangaReader.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
