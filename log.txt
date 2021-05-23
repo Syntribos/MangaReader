@@ -1,7 +1,0 @@
-2021-05-22 18:58:22.999 -04:00 [INF] MSBuild registered from C:\Program Files\dotnet\sdk\5.0.203\
-2021-05-22 18:58:23.093 -04:00 [INF] Registered 1 extensions:
-	Default extension
-2021-05-22 18:58:25.052 -04:00 [INF] Initializing upgrade step Select an entrypoint
-2021-05-22 18:58:25.054 -04:00 [INF] Setting entrypoint to user selected project: C:\Projects\MangaReader\MangaReader.MainProject\MangaReader.MainProject.csproj
-2021-05-22 18:58:25.060 -04:00 [INF] Initializing upgrade step Select project to upgrade
-2021-05-22 18:58:25.138 -04:00 [INF] Initializing upgrade step Back up project
