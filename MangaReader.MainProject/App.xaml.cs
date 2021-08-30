@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using MangaReader.Models;
 using MangaReader.Views;
@@ -14,8 +15,8 @@ namespace MangaReader.MainProject
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
-            var path = @"C:\Users\Josh\Desktop\Bu Ke Jie nabokunosubetewo 4";
-            var mangaInfo = new MangaInfo(path, Directory.GetFiles(path));
+            var path = @"C:\Users\Jess\Desktop\Images\Avatars";
+            var mangaInfo = new MangaChapter(path, Directory.GetFiles(path));
             var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo);
             var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
 
