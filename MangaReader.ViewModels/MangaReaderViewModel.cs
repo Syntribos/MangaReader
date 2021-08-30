@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace MangaReader.ViewModels
     {
         private int _currentPageNumber;
         
-        public MangaReaderViewModel(MangaInfo mangaInfo)
+        public MangaReaderViewModel(MangaChapter mangaInfo)
         {
             ChapterInfo = mangaInfo;
             _currentPageNumber = 0;
         }
 
-        public MangaInfo ChapterInfo { get; }
+        public MangaChapter ChapterInfo { get; }
 
         public int CurrentPageNumber
         {
@@ -41,13 +42,13 @@ namespace MangaReader.ViewModels
 
         public void GoToNextPage()
         {
-            _currentPageNumber += 1;
+            _currentPageNumber = Math.Min(_currentPageNumber + 1, NumberOfPages);
             UpdatePageInfo();
         }
         
         public void GoToPreviousPage()
         {
-            _currentPageNumber -= 1;
+            _currentPageNumber = Math.Max(_currentPageNumber - 1, 0);
             UpdatePageInfo();
         }
 

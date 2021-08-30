@@ -4,9 +4,9 @@ using System.IO;
 
 namespace MangaReader.Models
 {
-    public class MangaInfo
+    public class MangaChapter
     {
-        public MangaInfo(string basePath, string[] files)
+        public MangaChapter(string basePath, string[] files)
         {
             Pages = files;
         }
