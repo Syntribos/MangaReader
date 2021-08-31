@@ -56,7 +56,10 @@ namespace MangaReader.Data
             return Tuple.Create(str1, str2);
         }
 
-        public void Dispose() => _connection.Dispose();
+        public void Dispose()
+        {
+            _connection.Dispose();
+        }
 
         protected void EnsureInitialization()
         {
@@ -66,9 +69,9 @@ namespace MangaReader.Data
             }
         }
 
-        private void CreateFile(string path)
+        private static void CreateFile(string path)
         {
-            FileInfo fi = new FileInfo(path);
+            var fi = new FileInfo(path);
 
             Directory.CreateDirectory(fi.Directory.FullName);
 
