@@ -11,7 +11,6 @@
     <Compile Remove="MangaReaderView.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj" />
     <ProjectReference Include="..\MangaReader.ViewModels\MangaReader.ViewModels.csproj" />
     <ProjectReference Include="..\MangaReader.Views\MangaReader.Views.csproj" />
   </ItemGroup>
