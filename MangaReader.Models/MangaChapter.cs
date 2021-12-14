@@ -4,7 +4,7 @@ using System.IO;
 
 namespace MangaReader.Models
 {
-    public class MangaChapter
+    public class MangaChapter : IChapter
     {
         public MangaChapter(string basePath, string[] files)
         {
