@@ -2,17 +2,22 @@
 
 namespace MangaReader.Models
 {
-    public class Manga
+    public class Manga : ISeries
     {
         public Manga()
         {
             
         }
         
-        public HashSet<MangaChapter> Chapters { get; }
+        public HashSet<IChapter> Chapters { get; }
         
         public string Title { get; }
         
         public string PreviewImagePath { get; }
+
+        public string AsDatabaseString()
+        {
+            return string.Empty;
+        }
     }
 }

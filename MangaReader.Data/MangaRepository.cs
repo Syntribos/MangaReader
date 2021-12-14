@@ -1,29 +1,44 @@
-﻿using MangaReader.Data.Interfaces;
-using MangaReader.Models;
+﻿using System;
 using System.Collections.Generic;
+
+using MangaReader.Data.Interfaces;
+using MangaReader.Models;
 
 namespace MangaReader.Data
 {
-    public class MangaRepository : DataRepository, IMangaRepository
+    public class MangaRepository : ChapterRepository, IMangaRepository
     {
-        public MangaRepository(string databasePath)
+        private readonly IMangaFactory _mangaFactory;
+
+        public MangaRepository(MangaFactory mangaFactory, string databasePath)
             : base(databasePath)
         {
+            _mangaFactory = mangaFactory;
         }
 
-        public IEnumerable<Manga> GetAllManga()
+        public void SaveManga(Manga manga)
+        {
+            const string query = @"
+                INSERT INTO []
+                ()
+                VALUES (@mangaInfo)";
+
+            base.ExecuteBooleanNonQuery(query, new List<System.Tuple<string, string>> { new Tuple<string, string>("@mangaInfo", manga.AsDatabaseString()) });
+        }
+
+        public IEnumerable<ISeries> GetAllManga()
         {
             yield return ReadMangaData();
         }
 
-        public IEnumerable<Manga> GetMangaForCategory(string category)
+        public IEnumerable<ISeries> GetMangaForCategory(string category)
         {
             yield return ReadMangaData();
         }
 
-        private static Manga ReadMangaData()
+        private ISeries ReadMangaData()
         {
-            return new Manga();
+            return _mangaFactory.Create();
         }
     }
 }
