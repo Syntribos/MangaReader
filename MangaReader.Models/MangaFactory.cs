@@ -10,7 +10,12 @@ namespace MangaReader.Models
     {
         public ISeries Create()
         {
-            return new Manga();
+            return new Series(new HashSet<IChapter>(), string.Empty, String.Empty);
+        }
+
+        public ISeries CreateDefault()
+        {
+            return new Series(new HashSet<IChapter>(), string.Empty, String.Empty);
         }
     }
 }

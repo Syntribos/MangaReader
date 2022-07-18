@@ -6,17 +6,17 @@ using MangaReader.Models;
 
 namespace MangaReader.Data
 {
-    public class MangaRepository : ChapterRepository, IMangaRepository
+    public class SeriesRepository : ChapterRepository, ISeriesRepository
     {
         private readonly IMangaFactory _mangaFactory;
 
-        public MangaRepository(MangaFactory mangaFactory, string databasePath)
+        public SeriesRepository(MangaFactory mangaFactory, string databasePath)
             : base(databasePath)
         {
             _mangaFactory = mangaFactory;
         }
 
-        public void SaveManga(Manga manga)
+        public void SaveManga(Series manga)
         {
             const string query = @"
                 INSERT INTO []
@@ -31,7 +31,7 @@ namespace MangaReader.Data
             yield return ReadMangaData();
         }
 
-        public IEnumerable<ISeries> GetMangaForCategory(string category)
+        public IEnumerable<ISeries> GetMangaForCategory(int categoryIndex)
         {
             yield return ReadMangaData();
         }
