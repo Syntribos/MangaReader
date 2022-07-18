@@ -22,6 +22,10 @@ namespace MangaReader.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public double SeriesPerRow => 7;
+
+        public double RowsPerPage => 2;
         
         public IEnumerable<ISeries> SeriesList {
 

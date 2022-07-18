@@ -20,16 +20,13 @@ namespace MangaReader.MainProject
             var path = @"C:\Users\Jess\Desktop\Images\Avatars";
             var dbPath = @"C:\Databases\manga.db";
             var mangaInfo = new MangaChapter(path, Directory.GetFiles(path));
-            var mangaSeries = new Series(new HashSet<IChapter> { mangaInfo }, "Stuff", "asd");
+            var mangaSeries = new Series(new HashSet<IChapter> { mangaInfo }, "Stuff", @"C:\Users\Jess\Desktop\Images\Avatars\Hair.png");
             var categoryViewModel = new CategoryBrowserViewModel(new SeriesRepository(new MangaFactory(), dbPath), new Categories());
             var categoryView = new CategoryBrowserView(categoryViewModel);
             var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo);
             var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
-            
-            #if DEBUG
-            #endif
-            
-            categoryViewModel.DEBUGSetMangaList(new HashSet<ISeries> {mangaSeries});
+
+            categoryViewModel.DEBUGSetMangaList(new List<ISeries> { mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, mangaSeries, });
 
             categoryView.Show();
         }
