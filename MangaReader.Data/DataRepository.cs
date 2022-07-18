@@ -27,7 +27,7 @@ namespace MangaReader.Data
 
         public bool ExecuteBooleanNonQuery(string query, List<Tuple<string, string>> parameters)
         {
-            return ExecuteBooleanNonQuery(query, parameters, (x) => { return x > 0; });
+            return ExecuteBooleanNonQuery(query, parameters, (x) => x > 0);
         }
 
         public bool ExecuteBooleanNonQuery(string query, List<Tuple<string, string>> parameters, Func<int, bool> predicate)
@@ -73,29 +73,25 @@ namespace MangaReader.Data
         {
             var fi = new FileInfo(path);
 
-            Directory.CreateDirectory(fi.Directory.FullName);
+            if (fi.Directory == null)
+            {
+                throw new ArgumentException($"Directory {path} does not exist.");
+            }
 
+            Directory.CreateDirectory(fi.Directory.FullName);
             File.Create(Path.GetFileName(path));
         }
 
         private void InitializeDatabase()
         {
-            try
-            {
-                ExecuteBooleanNonQuery(
-                    @"
-                        put db schema here
-                    ",
-                    new List<Tuple<string, string>>
-                    {
-                    }
-                );
-
-            }
-            finally
-            {
-                _connection.Close();
-            }
+            ExecuteBooleanNonQuery(
+                @"
+                    put db schema here
+                ",
+                new List<Tuple<string, string>>
+                {
+                }
+            );
         }
     }
 }

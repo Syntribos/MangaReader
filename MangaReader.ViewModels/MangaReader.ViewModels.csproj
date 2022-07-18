@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MangaReader.Data\MangaReader.Data.csproj" />
     <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj" />
   </ItemGroup>
 

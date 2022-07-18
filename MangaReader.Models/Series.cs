@@ -2,11 +2,13 @@
 
 namespace MangaReader.Models
 {
-    public class Manga : ISeries
+    public class Series : ISeries
     {
-        public Manga()
+        public Series(HashSet<IChapter> chapters, string title, string previewImagePath)
         {
-            
+            Chapters = chapters;
+            Title = title;
+            PreviewImagePath = previewImagePath;
         }
         
         public HashSet<IChapter> Chapters { get; }
@@ -18,6 +20,11 @@ namespace MangaReader.Models
         public string AsDatabaseString()
         {
             return string.Empty;
+        }
+
+        public override string ToString()
+        {
+            return $"{Title} {Chapters.Count}";
         }
     }
 }
