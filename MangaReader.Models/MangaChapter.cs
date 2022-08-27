@@ -1,29 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace MangaReader.Models
 {
     public class MangaChapter : IChapter
     {
-        public MangaChapter(string basePath, string[] files)
+        private readonly string _basePath;
+
+        public MangaChapter(string chapterName, int chapterNumber, string basePath, string[] fileNames, string previewFilename)
         {
-            Pages = files;
+            _basePath = basePath;
+
+            ChapterName = chapterName;
+            ChapterNumber = chapterNumber;
+            PageFilenames = fileNames;
+            PreviewImagePath = Path.Combine(_basePath, previewFilename);
+        }
+
+        public MangaChapter(string chapterName, int chapterNumber, string basePath, string[] fileNames)
+        : this(chapterName, chapterNumber, basePath, fileNames, Path.Combine(basePath, fileNames.First()))
+        {
         }
         
-        public string[] Pages { get; }
+        public string ChapterName { get; }
         
-        public int PageCount
-        {
-            get
-            {
-                return Pages.Length;
-            }
-        }
+        public int ChapterNumber { get; }
+        
+        public string[] PageFilenames { get; }
+
+        public int PageCount => PageFilenames.Length;
+
+        public string PreviewImagePath { get; }
 
         public string GetPagePath(int pageNumber)
         {
-            return Pages[pageNumber];
+            if (pageNumber < 0)
+            {
+                return PageFilenames.First();
+            }
+            else if (pageNumber >= PageCount)
+            {
+                return PageFilenames.Last();
+            }
+
+            return Path.Combine(_basePath, PageFilenames[pageNumber]);
         }
     }
 }

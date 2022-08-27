@@ -8,12 +8,12 @@ using MangaReader.ViewModels.Annotations;
 
 namespace MangaReader.ViewModels
 {
-    public class CategoryBrowserViewModel : INotifyPropertyChanged
+    public class CategoryBrowserViewModel : BrowserViewBase
     {
         private readonly ISeriesRepository _seriesRepository;
         private readonly Categories _categories;
 
-        private IEnumerable<ISeries> _seriesList;
+        private IEnumerable<ISeriesPreview> _seriesPreviews;
 
         public CategoryBrowserViewModel(ISeriesRepository seriesRepository, Categories categories)
         {
@@ -21,29 +21,27 @@ namespace MangaReader.ViewModels
             _categories = categories;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public double SeriesPerRow => 7;
 
         public double RowsPerPage => 2;
         
-        public IEnumerable<ISeries> SeriesList {
+        public IEnumerable<ISeriesPreview> SeriesList {
 
-            get => _seriesList;
+            get => _seriesPreviews;
 
             private set
             {
-                if (value.Equals(_seriesList))
+                if (value.Equals(_seriesPreviews))
                 {
                     return;
                 }
 
-                _seriesList = value;
+                _seriesPreviews = value;
                 OnPropertyChanged();
             }
         }
 
-        public void DEBUGSetMangaList(IEnumerable<ISeries> seriesList)
+        public void DEBUGSetMangaList(IEnumerable<ISeriesPreview> seriesList)
         {
             SeriesList = seriesList;
         }
@@ -55,14 +53,8 @@ namespace MangaReader.ViewModels
 
         public void ChangeCategoryByIndex(int categoryIndex)
         {
-            SeriesList = _seriesRepository.GetMangaForCategory(categoryIndex);
+            SeriesList = _seriesRepository.GetMangaPreviewsForCategory(categoryIndex);
             OnPropertyChanged(nameof(SeriesList));
-        }
-        
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

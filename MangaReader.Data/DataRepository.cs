@@ -2,17 +2,18 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 namespace MangaReader.Data
 {
-    public class DataRepository : IDataRepository
+    public class DataRepository : IDisposable
     {
-        protected readonly string _connectionString;
-        protected readonly SqliteConnection _connection;
-        protected bool _initialized;
+        private readonly string _connectionString;
+        private readonly SqliteConnection _connection;
+        private bool _initialized;
 
-        public DataRepository(string databasePath)
+        protected DataRepository(string databasePath)
         {
             _connectionString = $"Data Source={databasePath};";
             _connection = new SqliteConnection(_connectionString);
@@ -24,14 +25,26 @@ namespace MangaReader.Data
                 InitializeDatabase();
             }
         }
+        
+        protected bool ExecuteBooleanNonQuery(string query, (string Name, string Value) parameter)
+        {
+            return ExecuteBooleanNonQuery(query, new List<(string ParameterName, string Value)>{ parameter }, (x) => x > 0);
+        }
+        
+        protected bool ExecuteBooleanNonQuery(string query, (string Name, string Value) parameter, Func<int, bool> validator)
+        {
+            return ExecuteBooleanNonQuery(query, new List<(string ParameterName, string Value)>{ parameter }, validator);
+        }
 
-        public bool ExecuteBooleanNonQuery(string query, List<Tuple<string, string>> parameters)
+        protected bool ExecuteBooleanNonQuery(string query, IEnumerable<(string Name, string Value)> parameters)
         {
             return ExecuteBooleanNonQuery(query, parameters, (x) => x > 0);
         }
 
-        public bool ExecuteBooleanNonQuery(string query, List<Tuple<string, string>> parameters, Func<int, bool> predicate)
+        protected bool ExecuteBooleanNonQuery(string query, IEnumerable<(string Name, string Value)> parameters, Func<int, bool> predicate)
         {
+            EnsureInitialization();
+
             try
             {
                 _connection.Open();
@@ -40,7 +53,7 @@ namespace MangaReader.Data
 
                 foreach (var item in parameters)
                 {
-                    command.Parameters.AddWithValue(item.Item1, item.Item2);
+                    command.Parameters.AddWithValue(item.Name, item.Value);
                 }
 
                 return predicate(command.ExecuteNonQuery());
@@ -51,17 +64,76 @@ namespace MangaReader.Data
             }
         }
 
-        public Tuple<string, string> CreateParam(string str1, string str2)
+        protected T ExecuteReader<T>(string query, IEnumerable<(string Name, string Value)> parameters, Func<IDataReader, T> itemBuilder)
         {
-            return Tuple.Create(str1, str2);
+            EnsureInitialization();
+
+            try
+            {
+                _connection.Open();
+                var command = _connection.CreateCommand();
+                command.CommandText = query;
+
+                foreach (var item in parameters)
+                {
+                    command.Parameters.AddWithValue(item.Name, item.Value);
+                }
+
+                var reader = command.ExecuteReader();
+
+                if (!reader.Read())
+                {
+                    throw new InvalidOperationException("No results from query.");
+                }
+
+                return itemBuilder(reader);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        
+        protected IEnumerable<T> ExecuteListReader<T>(string query, IEnumerable<(string Name, string Value)> parameters, Func<IDataReader, T> itemBuilder)
+        {
+            EnsureInitialization();
+
+            try
+            {
+                _connection.Open();
+                var command = _connection.CreateCommand();
+                command.CommandText = query;
+
+                foreach (var item in parameters)
+                {
+                    command.Parameters.AddWithValue(item.Name, item.Value);
+                }
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return itemBuilder(reader);
+                }
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+
+        protected static (string Name, string Value) CreateParam(string str1, string str2)
+        {
+            return (str1, str2);
         }
 
         public void Dispose()
         {
             _connection.Dispose();
+            GC.SuppressFinalize(this);
         }
 
-        protected void EnsureInitialization()
+        private void EnsureInitialization()
         {
             if (!_initialized)
             {
@@ -88,10 +160,12 @@ namespace MangaReader.Data
                 @"
                     put db schema here
                 ",
-                new List<Tuple<string, string>>
+                new List<(string, string)>
                 {
                 }
             );
+
+            _initialized = true;
         }
     }
 }
