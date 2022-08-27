@@ -8,9 +8,11 @@ namespace MangaReader.Models
 {
     public interface IChapter
     {
-        string[] Pages { get; }
+        string[] PageFilenames { get; }
 
         int PageCount { get; }
+        
+        string PreviewImagePath { get; }
 
         string GetPagePath(int pageNumber);
     }

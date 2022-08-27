@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
 using MangaReader.Data.Interfaces;
 using MangaReader.Models;
 
@@ -8,37 +9,46 @@ namespace MangaReader.Data
 {
     public class SeriesRepository : ChapterRepository, ISeriesRepository
     {
-        private readonly IMangaFactory _mangaFactory;
-
-        public SeriesRepository(MangaFactory mangaFactory, string databasePath)
+        public SeriesRepository(string databasePath)
             : base(databasePath)
         {
-            _mangaFactory = mangaFactory;
         }
 
-        public void SaveManga(Series manga)
+        public void SaveManga(ISeries manga)
         {
             const string query = @"
                 INSERT INTO []
                 ()
                 VALUES (@mangaInfo)";
 
-            base.ExecuteBooleanNonQuery(query, new List<System.Tuple<string, string>> { new Tuple<string, string>("@mangaInfo", manga.AsDatabaseString()) });
+            var parameter = CreateParam("@mangaInfo", manga.AsDatabaseString());
+
+            ExecuteBooleanNonQuery(query, parameter, (x) => x == 1);
         }
 
-        public IEnumerable<ISeries> GetAllManga()
+        public IEnumerable<ISeriesPreview> GetAllMangaPreviews()
         {
-            yield return ReadMangaData();
+            const string query = @"
+";
+            yield return ExecuteReader(query, Enumerable.Empty<(string, string)>(), ReadMangaPreviewData);
         }
 
-        public IEnumerable<ISeries> GetMangaForCategory(int categoryIndex)
+        public IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex)
         {
-            yield return ReadMangaData();
+            const string query = @"
+";
+            return ExecuteListReader(query, Enumerable.Empty<(string, string)>(), ReadMangaPreviewData);
         }
 
-        private ISeries ReadMangaData()
+        private ISeriesPreview ReadMangaPreviewData(IDataReader reader)
         {
-            return _mangaFactory.Create();
+            var seriesTitle = reader.GetString(reader.GetOrdinal("series_title"));
+            var basePath = reader.GetString(reader.GetOrdinal("series_path"));
+            var previewFilename = reader.GetString(reader.GetOrdinal("series_preview_filename"));
+            var chapterCount = reader.GetInt32(reader.GetOrdinal("series_chapter_count"));
+            var unreadChapterCount = reader.GetInt32(reader.GetOrdinal("series_undread_chapter_count"));
+
+            return new SeriesPreview(seriesTitle, Path.Combine(basePath, previewFilename), chapterCount, unreadChapterCount);
         }
     }
 }

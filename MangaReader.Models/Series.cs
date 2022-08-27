@@ -4,14 +4,19 @@ namespace MangaReader.Models
 {
     public class Series : ISeries
     {
-        public Series(HashSet<IChapter> chapters, string title, string previewImagePath)
+        public Series(HashSet<IChapterPreview> chapters, ISeriesPreview seriesPreview)
+        : this(chapters, seriesPreview.Title, seriesPreview.PreviewImagePath)
+        {
+        }
+
+        public Series(HashSet<IChapterPreview> chapters, string title, string previewImagePath)
         {
             Chapters = chapters;
             Title = title;
             PreviewImagePath = previewImagePath;
         }
         
-        public HashSet<IChapter> Chapters { get; }
+        public HashSet<IChapterPreview> Chapters { get; }
         
         public string Title { get; }
         

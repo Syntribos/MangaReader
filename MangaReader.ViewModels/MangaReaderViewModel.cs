@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
+
 using MangaReader.Models;
 using MangaReader.ViewModels.Annotations;
 
@@ -13,13 +11,13 @@ namespace MangaReader.ViewModels
     {
         private int _currentPageNumber;
         
-        public MangaReaderViewModel(MangaChapter mangaInfo)
+        public MangaReaderViewModel(IChapter mangaInfo)
         {
             ChapterInfo = mangaInfo;
             _currentPageNumber = 0;
         }
 
-        public MangaChapter ChapterInfo { get; }
+        public IChapter ChapterInfo { get; }
 
         public int CurrentPageNumber
         {

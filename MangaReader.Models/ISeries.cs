@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MangaReader.Models
 {
     public interface ISeries
     {
-        HashSet<IChapter> Chapters { get; }
+        HashSet<IChapterPreview> Chapters { get; }
 
         string Title { get; }
 
         string PreviewImagePath { get; }
+
+        string AsDatabaseString();
     }
 }

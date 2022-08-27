@@ -8,9 +8,14 @@ namespace MangaReader.Utilities
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values.Length == 2
-                ? ((double)values[1] - 20) / (double)values[0]
-                : (double)parameter;
+            if (values.Length == 2
+                && values[0] is double first
+                && values[1] is double second)
+            {
+                return second / first;
+            }
+
+            return parameter;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

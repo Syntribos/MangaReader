@@ -5,6 +5,8 @@ namespace MangaReader.Data.Interfaces
 {
     public interface ISeriesRepository
     {
-        IEnumerable<ISeries> GetMangaForCategory(int categoryIndex);
+        IEnumerable<ISeriesPreview> GetAllMangaPreviews();
+
+        IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex);
     }
 }
