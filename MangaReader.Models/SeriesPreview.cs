@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MangaReader.Models;
 
 public class SeriesPreview : ISeriesPreview
 {
-    public SeriesPreview(string title, string previewImagePath, int chapterCount, int unreadChapterCount)
+    public SeriesPreview(Guid id, string title, string previewImagePath, int chapterCount, int unreadChapterCount)
     {
+        Id = id;
         Title = title;
         PreviewImagePath = previewImagePath;
         ChapterCount = chapterCount;
         UnreadChapterCount = unreadChapterCount;
     }
+
+    public Guid Id { get; }
 
     public string Title { get; }
 

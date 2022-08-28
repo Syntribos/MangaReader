@@ -7,6 +7,8 @@ namespace MangaReader.Data.Interfaces
     {
         IEnumerable<ISeriesPreview> GetAllMangaPreviews();
 
+        ISeries BuildSeriesFromPreview(ISeriesPreview preview);
+
         IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex);
     }
 }

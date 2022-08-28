@@ -9,7 +9,5 @@ namespace MangaReader.Models
         string Title { get; }
 
         string PreviewImagePath { get; }
-
-        string AsDatabaseString();
     }
 }
