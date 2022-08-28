@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,16 +37,7 @@ namespace MangaReader.Models
 
         public string GetPagePath(int pageNumber)
         {
-            if (pageNumber < 0)
-            {
-                return PageFilenames.First();
-            }
-            else if (pageNumber >= PageCount)
-            {
-                return PageFilenames.Last();
-            }
-
-            return Path.Combine(_basePath, PageFilenames[pageNumber]);
+            return Path.Combine(_basePath, PageFilenames[Math.Clamp(pageNumber, 0, PageCount - 1)]);
         }
     }
 }
