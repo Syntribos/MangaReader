@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MangaReader.Views"
         xmlns:models="clr-namespace:MangaReader.Models;assembly=MangaReader.Models"
         xmlns:utils="clr-namespace:MangaReader.Utilities;assembly=MangaReader.Utilities"
-        xmlns:viewModels="clr-namespace:MangaReader.ViewModels;assembly=MangaReader.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         d:DesignHeight="300" d:DesignWidth="300">
 
@@ -20,7 +20,7 @@
                             <Setter Property="Width">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource DimensionConverter}">
-                                        <Binding Path="SeriesPerRow" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type viewModels:ChapterBrowserViewModel}}"/>
+                                        <Binding Path="DataContext.SeriesPerRow" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:CategoryBrowserView}}"/>
                                         <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}"/>
                                     </MultiBinding>
                                 </Setter.Value>
@@ -28,7 +28,7 @@
                             <Setter Property="Height">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource DimensionConverter}">
-                                        <Binding Path="RowsPerPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type viewModels:ChapterBrowserViewModel}}"/>
+                                        <Binding Path="DataContext.RowsPerPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:CategoryBrowserView}}"/>
                                         <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}"/>
                                     </MultiBinding>
                                 </Setter.Value>
@@ -57,9 +57,13 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 Padding="5"
                 ItemsSource="{Binding SeriesList}"
-                ItemTemplate="{StaticResource SeriesTile}"
-                MouseDoubleClick="Control_OnMouseDoubleClick">
-            <ListBox.ItemContainerStyle>
+                ItemTemplate="{StaticResource SeriesTile}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding ShowSeriesCommand}" CommandParameter="{Binding ElementName=SeriesTileListBox, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Padding" Value="5"/>
                 </Style>

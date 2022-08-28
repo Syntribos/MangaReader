@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+
+using MangaReader.Models;
 
 namespace MangaReader.ViewModels.Commands
 {
@@ -13,12 +11,17 @@ namespace MangaReader.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return parameter is ISeriesPreview;
         }
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            if (!(parameter is ISeriesPreview preview))
+            {
+                return;
+            }
+            
+            Console.WriteLine(preview.ToString());
         }
     }
 }

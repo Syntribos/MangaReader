@@ -8,4 +8,8 @@
     <ProjectReference Include="..\MangaReader.Utilities\MangaReader.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EventArgs" />
+  </ItemGroup>
+
 </Project>

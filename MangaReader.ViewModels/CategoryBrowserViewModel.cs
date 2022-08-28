@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using MangaReader.Data.Interfaces;
 using MangaReader.Models;
 using MangaReader.ViewModels.Annotations;
@@ -15,11 +16,14 @@ namespace MangaReader.ViewModels
 
         private IEnumerable<ISeriesPreview> _seriesPreviews;
 
-        public CategoryBrowserViewModel(ISeriesRepository seriesRepository, Categories categories)
+        public CategoryBrowserViewModel(ISeriesRepository seriesRepository, Categories categories, ICommand showSeriesCommand)
         {
             _seriesRepository = seriesRepository;
             _categories = categories;
+            ShowSeriesCommand = showSeriesCommand;
         }
+        
+        public ICommand ShowSeriesCommand { get; }
 
         public double SeriesPerRow => 7;
 

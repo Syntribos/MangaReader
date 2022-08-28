@@ -6,6 +6,7 @@ using MangaReader.Data;
 using MangaReader.Models;
 using MangaReader.Views;
 using MangaReader.ViewModels;
+using MangaReader.ViewModels.Commands;
 
 namespace MangaReader.MainProject
 {
@@ -26,7 +27,7 @@ namespace MangaReader.MainProject
             var mangaSeriesPreview =
                 new SeriesPreview("A Cool Series Name", imagePaths.First(), imagePaths.Length, 0);
             var mangaSeries = mangaSeriesPreview.ToSeries(new HashSet<IChapterPreview> { mangaInfo });
-            var categoryViewModel = new CategoryBrowserViewModel(new SeriesRepository(dbPath), new Categories());
+            var categoryViewModel = new CategoryBrowserViewModel(new SeriesRepository(dbPath), new Categories(), new ShowSeriesCommand());
             var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo.ToChapter(imagePaths));
             var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
 
