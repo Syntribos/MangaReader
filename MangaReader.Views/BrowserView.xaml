@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MangaReader.Views"
              xmlns:viewModels="clr-namespace:MangaReader.ViewModels;assembly=MangaReader.ViewModels"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:BrowserViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
