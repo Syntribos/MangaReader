@@ -2,12 +2,15 @@
 using System.Windows.Input;
 
 using MangaReader.Models;
+using MangaReader.Models.EventArgs;
 
 namespace MangaReader.ViewModels.Commands
 {
-    public class ShowSeriesCommand : ICommand
+    public class ShowSeriesCommand : IShowSeriesCommand
     {
         public event EventHandler CanExecuteChanged;
+
+        public event EventHandler<ShowSeriesEventArgs> OnExecute;
 
         public bool CanExecute(object parameter)
         {
@@ -20,8 +23,9 @@ namespace MangaReader.ViewModels.Commands
             {
                 return;
             }
-            
-            Console.WriteLine(preview.ToString());
+
+            var message = new ShowSeriesEventArgs(preview);
+            OnExecute?.Invoke(this, message);
         }
     }
 }

@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:MangaReader.Views"
         xmlns:models="clr-namespace:MangaReader.Models;assembly=MangaReader.Models"
         xmlns:utils="clr-namespace:MangaReader.Utilities;assembly=MangaReader.Utilities"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModels="clr-namespace:MangaReader.ViewModels;assembly=MangaReader.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:CategoryBrowserViewModel, IsDesignTimeCreatable=True}"
         d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
@@ -58,11 +60,11 @@
                 Padding="5"
                 ItemsSource="{Binding SeriesList}"
                 ItemTemplate="{StaticResource SeriesTile}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ShowSeriesCommand}" CommandParameter="{Binding ElementName=SeriesTileListBox, Path=SelectedItem}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseDoubleClick">
+                        <b:InvokeCommandAction Command="{Binding ShowSeriesCommand}" CommandParameter="{Binding ElementName=SeriesTileListBox, Path=SelectedItem}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
                 <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Padding" Value="5"/>

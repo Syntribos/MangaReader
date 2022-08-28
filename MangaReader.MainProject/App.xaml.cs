@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
+
 using MangaReader.Data;
 using MangaReader.Models;
 using MangaReader.Views;
@@ -13,7 +14,7 @@ namespace MangaReader.MainProject
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private MainWindow _mainWindow;
 
@@ -27,14 +28,15 @@ namespace MangaReader.MainProject
             var mangaSeriesPreview =
                 new SeriesPreview("A Cool Series Name", imagePaths.First(), imagePaths.Length, 0);
             var mangaSeries = mangaSeriesPreview.ToSeries(new HashSet<IChapterPreview> { mangaInfo });
-            var categoryViewModel = new CategoryBrowserViewModel(new SeriesRepository(dbPath), new Categories(), new ShowSeriesCommand());
+            var showSeriesCommand = new ShowSeriesCommand();
+            var categoryViewModel = new CategoryBrowserViewModel(new SeriesRepository(dbPath), new Categories(), showSeriesCommand);
             var mangaReaderViewModel = new MangaReaderViewModel(mangaInfo.ToChapter(imagePaths));
             var mangaReaderView = new MangaReaderView(mangaReaderViewModel) {Title = "MangaReader"};
 
             categoryViewModel.DEBUGSetMangaList(new List<ISeriesPreview> { mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, mangaSeriesPreview, });
 
             var mainWindowViewModel = new MainWindowViewModel();
-            var browserViewModel = new BrowserViewModel(categoryViewModel);
+            var browserViewModel = new BrowserViewModel(categoryViewModel, showSeriesCommand);
             _mainWindow = new MainWindow { DataContext = mainWindowViewModel };
             Current.MainWindow = _mainWindow;
             _mainWindow.BrowserView.DataContext = browserViewModel;

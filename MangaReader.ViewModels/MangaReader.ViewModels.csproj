@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TinyMessenger" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MangaReader.Data\MangaReader.Data.csproj" />
     <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj" />
   </ItemGroup>
