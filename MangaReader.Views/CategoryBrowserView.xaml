@@ -9,7 +9,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewModels="clr-namespace:MangaReader.ViewModels;assembly=MangaReader.ViewModels"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:CategoryBrowserViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance viewModels:CategoryBrowserViewModel, IsDesignTimeCreatable=False}"
         d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
@@ -41,7 +41,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" x:Name="ImageHost">
                         <Grid.Background>
                             <ImageBrush ImageSource="{Binding Path=PreviewImagePath}" Stretch="Uniform"/>
                         </Grid.Background>

@@ -93,7 +93,14 @@ namespace MangaReader.Data
                 _connection.Close();
             }
         }
-        
+
+        protected IEnumerable<T> ExecuteListReader<T>(string query, (string Name, string Value) parameter,
+            Func<IDataReader, T> itemBuilder)
+        {
+            return ExecuteListReader(query, new List<(string Name, string Value)> { parameter }, itemBuilder);
+        }
+
+
         protected IEnumerable<T> ExecuteListReader<T>(string query, IEnumerable<(string Name, string Value)> parameters, Func<IDataReader, T> itemBuilder)
         {
             EnsureInitialization();

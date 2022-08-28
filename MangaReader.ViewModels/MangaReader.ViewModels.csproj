@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MangaReader.Data\MangaReader.Data.csproj" />
     <ProjectReference Include="..\MangaReader.Models\MangaReader.Models.csproj" />
   </ItemGroup>

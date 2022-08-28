@@ -8,6 +8,13 @@
              d:DataContext="{d:DesignInstance viewModels:ChapterBrowserViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock Text="{Binding Name}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding Name}"/>
+        <Button Grid.Row="1" Command="{Binding GoBackCommand}">
+            <TextBlock Text="Press to go back."/>
+        </Button>
     </Grid>
 </UserControl>
