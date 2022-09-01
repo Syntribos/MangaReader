@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:MangaReader.Views"
         xmlns:models="clr-namespace:MangaReader.Models;assembly=MangaReader.Models"
-        xmlns:utils="clr-namespace:MangaReader.Utilities;assembly=MangaReader.Utilities"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewModels="clr-namespace:MangaReader.ViewModels;assembly=MangaReader.ViewModels"
         mc:Ignorable="d"
@@ -13,30 +11,9 @@
         d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <utils:DimensionConverter x:Key="DimensionConverter"/>
         <DataTemplate x:Key="SeriesTile" DataType="models:SeriesPreview">
             <Border Padding="5">
                 <Grid x:Name="backgroundGrid">
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type Grid}">
-                            <Setter Property="Width">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource DimensionConverter}">
-                                        <Binding Path="DataContext.SeriesPerRow" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:CategoryBrowserView}}"/>
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}"/>
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Height">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource DimensionConverter}">
-                                        <Binding Path="DataContext.RowsPerPage" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type local:CategoryBrowserView}}"/>
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}"/>
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
@@ -72,13 +49,8 @@
             </ListBox.ItemContainerStyle>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <WrapPanel.Resources>
-                                <Style TargetType="{x:Type WrapPanel}">
-                                    
-                                </Style>
-                            </WrapPanel.Resources>
-                        </WrapPanel>
+                        <UniformGrid Columns="{Binding SeriesPerRow}" IsItemsHost="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        </UniformGrid>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
