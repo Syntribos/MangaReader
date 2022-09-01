@@ -24,6 +24,10 @@ namespace MangaReader.Data
                 CreateFile(databasePath);
                 InitializeDatabase();
             }
+            else
+            {
+                _initialized = true;
+            }
         }
         
         protected bool ExecuteBooleanNonQuery(string query, (string Name, string Value) parameter)
