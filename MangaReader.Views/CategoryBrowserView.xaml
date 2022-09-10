@@ -11,7 +11,7 @@
         d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="SeriesTile" DataType="models:SeriesPreview">
+        <DataTemplate x:Key="SeriesTile" DataType="{x:Type models:SeriesPreview}">
             <Border Padding="5">
                 <Grid x:Name="backgroundGrid">
                     <Grid.RowDefinitions>
@@ -30,29 +30,29 @@
     </UserControl.Resources>
    
     <Grid>
-            <ListBox
-                x:Name="SeriesTileListBox"
-                VerticalContentAlignment="Stretch"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                Padding="5"
-                ItemsSource="{Binding SeriesList}"
-                ItemTemplate="{StaticResource SeriesTile}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="MouseDoubleClick">
-                        <b:InvokeCommandAction Command="{Binding ShowSeriesCommand}" CommandParameter="{Binding ElementName=SeriesTileListBox, Path=SelectedItem}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
-                <ListBox.ItemContainerStyle>
+        <ListBox
+            x:Name="SeriesTileListBox"
+            VerticalContentAlignment="Stretch"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            Padding="5"
+            ItemsSource="{Binding SeriesList}"
+            ItemTemplate="{StaticResource SeriesTile}">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding ShowSeriesCommand}" CommandParameter="{Binding ElementName=SeriesTileListBox, Path=SelectedItem}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Padding" Value="5"/>
                 </Style>
             </ListBox.ItemContainerStyle>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding SeriesPerRow}" IsItemsHost="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        </UniformGrid>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding SeriesPerRow}" IsItemsHost="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </UserControl>
