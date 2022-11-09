@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Models", "Manga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.ViewModels", "MangaReader.ViewModels\MangaReader.ViewModels.csproj", "{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.DataManager", "MangaReader.DataManager\MangaReader.DataManager.csproj", "{8F91DF3B-C50B-4631-B66D-56D8D034B19D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F91DF3B-C50B-4631-B66D-56D8D034B19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F91DF3B-C50B-4631-B66D-56D8D034B19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F91DF3B-C50B-4631-B66D-56D8D034B19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F91DF3B-C50B-4631-B66D-56D8D034B19D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

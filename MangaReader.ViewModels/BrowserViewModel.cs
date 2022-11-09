@@ -1,9 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
+
 using CommunityToolkit.Mvvm.Input;
-using MangaReader.Data.Interfaces;
+
+using MangaReader.Data;
+using MangaReader.DataManager;
 using MangaReader.Models.EventArgs;
 using MangaReader.ViewModels.Annotations;
 using MangaReader.ViewModels.Commands;
@@ -13,16 +17,16 @@ namespace MangaReader.ViewModels;
 public class BrowserViewModel : INotifyPropertyChanged
 {
     private readonly IBrowserView _seriesBrowser;
-    private readonly ISeriesRepository _seriesRepository;
+    private readonly IDatabaseQuerier _querier;
 
     private IBrowserView _currentBrowser;
 
-    public BrowserViewModel(IBrowserView browserView, IShowSeriesCommand showSeriesCommand, ISeriesRepository seriesRepository)
+    public BrowserViewModel(IBrowserView browserView, IShowSeriesCommand showSeriesCommand, IDatabaseQuerier querier)
     {
         _seriesBrowser = browserView;
-        _seriesRepository = seriesRepository;
-        _currentBrowser = browserView;
+        _querier = querier;
 
+        _currentBrowser = browserView;
         showSeriesCommand.OnExecute += async (s, e) => await ShowSeries(s, e);
     }
 
@@ -46,9 +50,14 @@ public class BrowserViewModel : INotifyPropertyChanged
 
     private async Task ShowSeries(object sender, ShowSeriesEventArgs args)
     {
-        var series = await Task.Factory.StartNew(() => _seriesRepository.BuildSeriesFromPreview(args.SeriesPreview));
-        var chapterBrowserViewModel = new ChapterBrowserViewModel(series, new RelayCommand(ReturnToSeriesBrowser));
-        CurrentBrowser = chapterBrowserViewModel;
+        var seriesResult = await _querier.RunQuery((manager, _) => manager.SeriesManager.BuildSeriesFromPreview(args.SeriesPreview),
+            CancellationToken.None);
+
+        if (seriesResult.Completed)
+        {
+            var chapterBrowserViewModel = new ChapterBrowserViewModel(seriesResult.Value, new RelayCommand(ReturnToSeriesBrowser));
+            CurrentBrowser = chapterBrowserViewModel;
+        }
     }
 
     private void ReturnToSeriesBrowser()
