@@ -1,26 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Input;
-using MangaReader.Data.Interfaces;
+using MangaReader.DataManager;
 using MangaReader.Models;
+using MangaReader.Utilities;
 using MangaReader.ViewModels.Annotations;
+using MangaReader.ViewModels.Commands;
 
 namespace MangaReader.ViewModels
 {
     public class CategoryBrowserViewModel : BrowserViewBase
     {
-        private readonly ISeriesRepository _seriesRepository;
+        private readonly IDatabaseQuerier _querier;
+        private readonly IUserInterfaceUpdater _uiUpdater;
         private readonly Categories _categories;
 
         private IEnumerable<ISeriesPreview> _seriesPreviews;
 
-        public CategoryBrowserViewModel(ISeriesRepository seriesRepository, Categories categories, ICommand showSeriesCommand)
+        public CategoryBrowserViewModel(IDatabaseQuerier querier, IUserInterfaceUpdater uiUpdater, Categories categories, IShowSeriesCommand showSeriesCommand)
         {
-            _seriesRepository = seriesRepository;
+            _querier = querier;
+            _uiUpdater = uiUpdater;
             _categories = categories;
             ShowSeriesCommand = showSeriesCommand;
+            
+            var path = @"C:\Users\Jess\Desktop\Images\Avatars";
+            var imagePaths = Directory.GetFiles(path);
+            var msp = new SeriesPreview(Guid.NewGuid(), "A Cool Series Name", imagePaths.First(), imagePaths.Length, 0);
+            DEBUGSetMangaList(new List<ISeriesPreview> { msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, });
         }
         
         public ICommand ShowSeriesCommand { get; }
@@ -55,10 +68,22 @@ namespace MangaReader.ViewModels
             ChangeCategoryByIndex(_categories.GetCategoryIndexByName(categoryName));
         }
 
-        public void ChangeCategoryByIndex(int categoryIndex)
+        public async void ChangeCategoryByIndex(int categoryIndex)
         {
-            SeriesList = _seriesRepository.GetMangaPreviewsForCategory(categoryIndex);
-            OnPropertyChanged(nameof(SeriesList));
+            var seriesResult = await _querier.RunQuery((manager, _) => manager.SeriesManager.GetMangaPreviewsForCategory(categoryIndex), CancellationToken.None);
+
+            if (!seriesResult.Completed)
+            {
+                return;
+            }
+
+            _uiUpdater.RunOnUi(() =>
+            {
+                SeriesList = seriesResult.Value;
+                OnPropertyChanged(nameof(SeriesList));
+            },
+            CancellationToken.None,
+            (ex) => Console.WriteLine(ex.Message));
         }
     }
 }

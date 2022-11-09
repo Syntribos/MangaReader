@@ -14,4 +14,7 @@
     <ProjectReference Include="..\MangaReader.ViewModels\MangaReader.ViewModels.csproj" />
     <ProjectReference Include="..\MangaReader.Views\MangaReader.Views.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
+  </ItemGroup>
 </Project>
