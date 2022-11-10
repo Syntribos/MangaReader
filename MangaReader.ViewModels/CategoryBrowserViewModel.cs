@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Input;
 using MangaReader.DataManager;
 using MangaReader.Models;
 using MangaReader.Utilities;
-using MangaReader.ViewModels.Annotations;
 using MangaReader.ViewModels.Commands;
 
 namespace MangaReader.ViewModels
@@ -42,8 +38,8 @@ namespace MangaReader.ViewModels
 
         public double RowsPerPage => 2;
         
-        public IEnumerable<ISeriesPreview> SeriesList {
-
+        public IEnumerable<ISeriesPreview> SeriesList
+        {
             get => _seriesPreviews;
 
             private set
@@ -77,7 +73,7 @@ namespace MangaReader.ViewModels
                 return;
             }
 
-            _uiUpdater.RunOnUi(() =>
+            await _uiUpdater.RunOnUi(() =>
             {
                 SeriesList = seriesResult.Value;
                 OnPropertyChanged(nameof(SeriesList));

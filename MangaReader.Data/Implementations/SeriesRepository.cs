@@ -2,7 +2,7 @@
 using System.Data;
 using System.IO;
 using System.Linq;
-
+using System.Threading;
 using MangaReader.Models;
 
 namespace MangaReader.Data.Implementations;
@@ -26,28 +26,28 @@ public class SeriesRepository : ChapterRepository, ISeriesRepository
         ExecuteBooleanNonQuery(query, parameter, (x) => x == 1);
     }
 
-    public IEnumerable<ISeriesPreview> GetAllMangaPreviews()
+    public IEnumerable<ISeriesPreview> GetAllMangaPreviews(CancellationToken cancellationToken)
     {
         const string query = @"
 ";
-        yield return ExecuteReader(query, Enumerable.Empty<Parameter>(), ReadMangaPreviewData);
+        return ExecuteListReader(query, Enumerable.Empty<Parameter>(), ReadMangaPreviewData, cancellationToken);
     }
 
-    public ISeries BuildSeriesFromPreview(ISeriesPreview preview)
+    public ISeries BuildSeriesFromPreview(ISeriesPreview preview, CancellationToken cancellationToken)
     {
         const string query = @"
 ";
         var parameter = Parameter.CreateParameter("@id", preview.Id.ToString());
-        var chapterPreviews = ExecuteListReader(query, parameter, ReadChapterData).ToHashSet();
+        var chapterPreviews = ExecuteListReader(query, parameter, ReadChapterData, cancellationToken).ToHashSet();
 
         return preview.ToSeries(chapterPreviews);
     }
 
-    public IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex)
+    public IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex, CancellationToken cancellationToken)
     {
         const string query = @"
 ";
-        return ExecuteListReader(query, Enumerable.Empty<Parameter>(), ReadMangaPreviewData);
+        return ExecuteListReader(query, Enumerable.Empty<Parameter>(), ReadMangaPreviewData, cancellationToken);
     }
 
     private static ISeriesPreview ReadMangaPreviewData(IDataReader reader)

@@ -1,16 +1,14 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-using CommunityToolkit.Mvvm.Input;
-
-using MangaReader.Data;
 using MangaReader.DataManager;
 using MangaReader.Models.EventArgs;
 using MangaReader.ViewModels.Annotations;
 using MangaReader.ViewModels.Commands;
+
+using CommunityToolkit.Mvvm.Input;
 
 namespace MangaReader.ViewModels;
 

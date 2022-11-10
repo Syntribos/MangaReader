@@ -1,11 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 using MangaReader.Models;
-using MangaReader.ViewModels.Annotations;
 
 namespace MangaReader.ViewModels;
 

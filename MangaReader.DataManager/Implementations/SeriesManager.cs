@@ -15,9 +15,9 @@ public class SeriesManager : ISeriesManager
         _seriesRepository = seriesRepository;
     }
 
-    public IEnumerable<ISeriesPreview> GetAllMangaPreviews()
+    public IEnumerable<ISeriesPreview> GetAllMangaPreviews(CancellationToken cancellationToken)
     {
-        return _seriesRepository.GetAllMangaPreviews();
+        return _seriesRepository.GetAllMangaPreviews(cancellationToken);
     }
 
     public ISeries BuildSeriesFromPreview(ISeriesPreview preview)

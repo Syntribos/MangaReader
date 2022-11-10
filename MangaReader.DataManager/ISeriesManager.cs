@@ -4,7 +4,7 @@ namespace MangaReader.DataManager;
 
 public interface ISeriesManager
 {
-    IEnumerable<ISeriesPreview> GetAllMangaPreviews();
+    IEnumerable<ISeriesPreview> GetAllMangaPreviews(CancellationToken cancellationToken);
 
     ISeries BuildSeriesFromPreview(ISeriesPreview preview);
 
