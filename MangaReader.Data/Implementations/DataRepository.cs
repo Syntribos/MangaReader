@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using MangaReader.Models;
 using Contract = MangaReader.Utilities.Contract;
 
@@ -105,13 +106,12 @@ public class DataRepository : IDisposable
         }
     }
 
-    protected IEnumerable<T> ExecuteListReader<T>(string query, Parameter parameter,
-        Func<IDataReader, T> itemBuilder)
+    protected IEnumerable<T> ExecuteListReader<T>(string query, Parameter parameter, Func<IDataReader, T> itemBuilder, CancellationToken cancellationToken)
     {
-        return ExecuteListReader(query, new List<Parameter> { parameter }, itemBuilder);
+        return ExecuteListReader(query, new List<Parameter> { parameter }, itemBuilder, cancellationToken);
     }
     
-    protected IEnumerable<T> ExecuteListReader<T>(string query, IEnumerable<Parameter> parameters, Func<IDataReader, T> itemBuilder)
+    protected IEnumerable<T> ExecuteListReader<T>(string query, IEnumerable<Parameter> parameters, Func<IDataReader, T> itemBuilder, CancellationToken cancellationToken)
     {
         EnsureInitialization();
 
@@ -130,6 +130,7 @@ public class DataRepository : IDisposable
 
             while (reader.Read())
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 yield return itemBuilder(reader);
             }
         }

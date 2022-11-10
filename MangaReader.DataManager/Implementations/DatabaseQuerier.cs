@@ -23,11 +23,11 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
         _cancellationTokenSource.Cancel();
     }
 
-    public async Task<IQueryResult<T>> RunQuery<T>(Func<IManager, CancellationToken, T> dataReadTask, CancellationToken cancellationToken)
+    public async Task<IQueryResult<T>> RunQuery<T>(Func<IManager, CancellationToken, T> dataFunc, CancellationToken cancellationToken)
     {
         try
         {
-            var result = await CreateTask((manager, cancelToken) => dataReadTask(manager, cancelToken), cancellationToken);
+            var result = await CreateTask((manager, cancelToken) => dataFunc(manager, cancelToken), cancellationToken);
 
             return new QueryResult<T>(result, true);
         }
@@ -37,9 +37,9 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
         }
     }
 
-    private Task<T> CreateTask<T>(Func<IManager, CancellationToken, T> context, CancellationToken token)
+    private Task<T> CreateTask<T>(Func<IManager, CancellationToken, T> dataFunc, CancellationToken token)
     {
-        Contract.RequireNotNull(context, nameof(context));
+        Contract.RequireNotNull(dataFunc, nameof(dataFunc));
         
         if (Closed)
         {
@@ -55,7 +55,7 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
                     return default;
                 }
 
-                var result = context(Manager, linkedTokenSource.Token);
+                var result = dataFunc(Manager, linkedTokenSource.Token);
                 
                 if (Closed)
                 {
