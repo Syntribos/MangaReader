@@ -32,9 +32,26 @@ namespace MangaReader.Utilities
             }
         }
 
-        public static IEnumerable<T> Sort<T>(this IEnumerable<T> list)
+        public static IEnumerable<T> OrderBy<T>(this IEnumerable<T> list)
         {
             return list.OrderBy(x => x);
+        }
+        
+        public static IDictionary<TDictKey, TDictValue> ToDistinctDictionary<TValue, TDictKey, TDictValue>(
+            this IEnumerable<TValue> list,
+            Func<TValue, TDictKey> keySelector,
+            Func<TValue, TDictValue> valueSelector)
+        {
+            return list.ToDistinctDictionary(keySelector, keySelector, valueSelector);
+        }
+
+        public static IDictionary<TDictKey, TDictValue> ToDistinctDictionary<TValue, TEquality, TDictKey, TDictValue>(
+            this IEnumerable<TValue> list,
+            Func<TValue, TEquality> equalitySelector,
+            Func<TValue, TDictKey> keySelector,
+            Func<TValue, TDictValue> valueSelector)
+        {
+            return list.GroupBy(x => equalitySelector).Select(x => x.First()).ToDictionary(keySelector, valueSelector);
         }
     }
 }

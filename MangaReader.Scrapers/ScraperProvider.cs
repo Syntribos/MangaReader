@@ -1,15 +1,18 @@
-﻿namespace MangaReader.Scrapers;
+﻿using MangaReader.Scrapers.Exceptions;
+using MangaReader.Utilities;
+
+namespace MangaReader.Scrapers;
 
 public class ScraperProvider : IScraperProvider
 {
-    private readonly Dictionary<string, IScraper> _map;
+    private readonly IDictionary<string, IScraper> _map;
     private readonly HashSet<IScraper> _scrapers;
 
-    public ScraperProvider(
-        MangaDexScraper mangaDexScraper)
+    public ScraperProvider(IEnumerable<IScraper> scrapers)
     {
-        _scrapers = new HashSet<IScraper> { mangaDexScraper };
-        _map = _scrapers.ToDictionary(x => x.Key, x => x);
+        scrapers = scrapers.ToList();
+        _map = scrapers.ToDistinctDictionary(x => x.Key, x => x);
+        _scrapers = new HashSet<IScraper>(scrapers);
     }
 
     public IScraper GetByKey(string key)
@@ -19,6 +22,18 @@ public class ScraperProvider : IScraperProvider
             return scraper;
         }
 
-        throw new NotSupportedException($"Scraper {key} does not exist.");
+        throw new NoValidScraperException($"Scraper {key} does not exist.");
+    }
+
+    public IScraper GetByUrl(string url)
+    {
+        try
+        {
+            return _scrapers.First(x => x.UrlPattern.IsMatch(url));
+        }
+        catch (InvalidOperationException e)
+        {
+            throw new NoValidScraperException($"No manga providers enabled for URL {url}. Double check the URL was typed correctly. If it was, please report this as a bug.");
+        }
     }
 }
