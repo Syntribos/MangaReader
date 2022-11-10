@@ -29,7 +29,13 @@ public partial class App
         var browserViewModel = container.Resolve<BrowserViewModel>();
         var mainWindowViewModel = new MainWindowViewModel();
 
-        var sp = container.Resolve<IScraperProvider>();
+        var scraperProvider = container.Resolve<IScraperProvider>();
+
+        var mangaUrl =
+            @"https://mangadex.org/title/ffe69cc2-3f9e-4eab-a7f7-c963cea9ec25/lonely-attack-on-a-different-world";
+        var mdScraper = scraperProvider.GetByUrl(mangaUrl);
+        mdScraper.AddManga(mangaUrl);
+        
 
         _mainWindow = new MainWindow { DataContext = mainWindowViewModel };
         Current.MainWindow = _mainWindow;
