@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Windows.Input;
-
 using MangaReader.Models;
 using MangaReader.Models.EventArgs;
 
-namespace MangaReader.ViewModels.Commands
+namespace MangaReader.ViewModels.Commands.CommandImplementations
 {
     public class ShowSeriesCommand : IShowSeriesCommand
     {

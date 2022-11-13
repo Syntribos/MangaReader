@@ -8,6 +8,7 @@ using MangaReader.Models;
 using MangaReader.Utilities;
 using MangaReader.ViewModels;
 using MangaReader.ViewModels.Commands;
+using MangaReader.ViewModels.Commands.CommandImplementations;
 using MangaReader.Views;
 
 namespace MangaReader.MainProject;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using MangaReader.Data;
+﻿using MangaReader.Data;
 using MangaReader.Models;
 using MangaReader.Utilities;
 
@@ -25,7 +22,7 @@ public class SeriesManager : ISeriesManager
 
     public ISeries BuildSeriesFromPreview(ISeriesPreview preview)
     {
-        throw new NotImplementedException();
+        return SeriesFactory.EmptySeries;
     }
 
     public IEnumerable<ISeriesPreview> GetMangaPreviewsForCategory(int categoryIndex)
