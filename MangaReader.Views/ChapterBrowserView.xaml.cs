@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using MangaReader.ViewModels;
 
 namespace MangaReader.Views
 {

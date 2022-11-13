@@ -8,6 +8,7 @@ using MangaReader.Models;
 using MangaReader.Utilities;
 using MangaReader.ViewModels;
 using MangaReader.ViewModels.Commands;
+using MangaReader.Views;
 
 namespace MangaReader.MainProject;
 
@@ -39,10 +40,14 @@ public class AppContainerProvider
         builder.RegisterType<SettingsManager>().As<ISettingsManager>().SingleInstance();
 
         builder.RegisterType<ShowSeriesCommand>().As<IShowSeriesCommand>().SingleInstance();
-        builder.RegisterType<CategoryBrowserViewModel>().As<IBrowserView>().SingleInstance();
+        builder.RegisterType<CategoryBrowserViewModel>()
+            .As<ICategoryBrowserViewModel>().As<IInitialBrowserView>()
+            .SingleInstance();
         builder.RegisterType<Categories>().SingleInstance();
         
         builder.RegisterType<BrowserViewModel>().SingleInstance();
+        builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
+        builder.RegisterType<MainWindow>().SingleInstance();
 
         RegisterModules(builder);
 

@@ -1,4 +1,7 @@
-﻿using MangaReader.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using MangaReader.Data;
 using MangaReader.Models;
 using MangaReader.Utilities;
 

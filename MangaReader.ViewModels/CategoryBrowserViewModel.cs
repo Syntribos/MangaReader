@@ -11,7 +11,7 @@ using MangaReader.ViewModels.Commands;
 
 namespace MangaReader.ViewModels
 {
-    public class CategoryBrowserViewModel : BrowserViewBase
+    public class CategoryBrowserViewModel : BrowserViewBase, IInitialBrowserView, ICategoryBrowserViewModel
     {
         private readonly IDatabaseQuerier _querier;
         private readonly IUserInterfaceUpdater _uiUpdater;

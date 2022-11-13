@@ -1,4 +1,7 @@
-﻿using MangaReader.Utilities;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using MangaReader.Utilities;
 
 namespace MangaReader.DataManager.Implementations;
 
@@ -27,7 +30,7 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
     {
         try
         {
-            var result = await CreateTask((manager, cancelToken) => dataFunc(manager, cancelToken), cancellationToken);
+            var result = await CreateTask(dataFunc, cancellationToken);
 
             return new QueryResult<T>(result, true);
         }
