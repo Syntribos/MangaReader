@@ -16,7 +16,7 @@ namespace MangaReader.MainProject;
 public partial class App
 {
     private const string DB_PATH = @"C:\Databases\manga.db";
-    const string TEST_MANGA_URL =
+    private const string TEST_MANGA_URL =
         @"https://mangadex.org/title/ffe69cc2-3f9e-4eab-a7f7-c963cea9ec25/lonely-attack-on-a-different-world";
 
     private readonly AppContainerProvider _appContainerProvider;

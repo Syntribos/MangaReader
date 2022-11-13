@@ -34,7 +34,7 @@ public class BrowserViewModel : INotifyPropertyChanged
     {
         get => _currentBrowser;
 
-        set
+        private set
         {
             if (value == _currentBrowser)
             {
