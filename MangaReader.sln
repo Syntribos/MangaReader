@@ -3,26 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.MainProject", "MangaReader.MainProject\MangaReader.MainProject.csproj", "{67E59B44-922A-4BCF-BE15-070D8F41504D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader", "MangaReader\MangaReader.csproj", "{67E59B44-922A-4BCF-BE15-070D8F41504D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Views", "MangaReader.Views\MangaReader.Views.csproj", "{5D3419EE-9246-42E5-82AE-89359935624A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Views", "Views\Views.csproj", "{5D3419EE-9246-42E5-82AE-89359935624A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Data", "MangaReader.Data\MangaReader.Data.csproj", "{7AF82376-9A78-4A80-B13C-6ABC80E72A56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{7AF82376-9A78-4A80-B13C-6ABC80E72A56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AEF5235-CC4D-420C-9EEE-B55BF58FA90C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Utilities", "MangaReader.Utilities\MangaReader.Utilities.csproj", "{068F177B-49C2-4A61-92D5-4C7E1B0E6E7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{068F177B-49C2-4A61-92D5-4C7E1B0E6E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Models", "MangaReader.Models\MangaReader.Models.csproj", "{2E0515F4-6FAD-4BDA-89DC-39DBEDF36E09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{2E0515F4-6FAD-4BDA-89DC-39DBEDF36E09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.ViewModels", "MangaReader.ViewModels\MangaReader.ViewModels.csproj", "{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.DataManager", "MangaReader.DataManager\MangaReader.DataManager.csproj", "{8F91DF3B-C50B-4631-B66D-56D8D034B19D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{8F91DF3B-C50B-4631-B66D-56D8D034B19D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Scrapers", "MangaReader.Scrapers\MangaReader.Scrapers.csproj", "{4534701A-3327-4E99-8EF0-1B4C318EDF84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrapers", "Scrapers\Scrapers.csproj", "{4534701A-3327-4E99-8EF0-1B4C318EDF84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
