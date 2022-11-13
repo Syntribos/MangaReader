@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 using MangaReader.Models;
+using MangaReader.ViewModels;
 
 namespace MangaReader.Views
 {

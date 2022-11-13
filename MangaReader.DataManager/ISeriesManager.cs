@@ -1,4 +1,6 @@
-﻿using MangaReader.Models;
+﻿using System.Collections.Generic;
+using System.Threading;
+using MangaReader.Models;
 
 namespace MangaReader.DataManager;
 

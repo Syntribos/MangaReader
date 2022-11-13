@@ -4,7 +4,7 @@ using MangaReader.ViewModels.Annotations;
 
 namespace MangaReader.ViewModels;
 
-public class MainWindowViewModel : INotifyPropertyChanged
+public class MainWindowViewModel : IMainWindowViewModel, INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

@@ -19,7 +19,7 @@ public class BrowserViewModel : INotifyPropertyChanged
 
     private IBrowserView _currentBrowser;
 
-    public BrowserViewModel(IBrowserView browserView, IShowSeriesCommand showSeriesCommand, IDatabaseQuerier querier)
+    public BrowserViewModel(IInitialBrowserView browserView, IShowSeriesCommand showSeriesCommand, IDatabaseQuerier querier)
     {
         _seriesBrowser = browserView;
         _querier = querier;
@@ -64,7 +64,7 @@ public class BrowserViewModel : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
