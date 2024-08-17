@@ -1,8 +1,7 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Scrapers;
 
-namespace MangaReader;
+namespace MangaReader.AutofacModules;
 
 public class ScraperModule : Module
 {

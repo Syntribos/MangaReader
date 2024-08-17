@@ -43,8 +43,6 @@ public class DataRepository : IDisposable
 
     protected bool ExecuteBooleanNonQuery(string query, IEnumerable<Parameter> parameters, Func<int, bool> predicate)
     {
-        EnsureInitialization();
-
         try
         {
             _connection.Open();
@@ -76,8 +74,6 @@ public class DataRepository : IDisposable
 
     protected T ExecuteReader<T>(string query, IEnumerable<Parameter> parameters, Func<IDataReader, T> itemBuilder)
     {
-        EnsureInitialization();
-
         try
         {
             _connection.Open();
@@ -111,13 +107,15 @@ public class DataRepository : IDisposable
     
     protected IEnumerable<T> ExecuteListReader<T>(string query, IEnumerable<Parameter> parameters, Func<IDataReader, T> itemBuilder, CancellationToken cancellationToken)
     {
-        EnsureInitialization();
-
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             _connection.Open();
             var command = _connection.CreateCommand();
             command.CommandText = query;
+            
+            cancellationToken.ThrowIfCancellationRequested();
 
             foreach (var item in parameters)
             {
@@ -142,14 +140,6 @@ public class DataRepository : IDisposable
     {
         _connection.Dispose();
         GC.SuppressFinalize(this);
-    }
-
-    private void EnsureInitialization()
-    {
-        if (!_initialized)
-        {
-            throw new NotSupportedException("Data repository must be initialized before use.");
-        }
     }
     
     private SQLiteConnection CreateOrOpenDatabase(IConnectionStringProvider connectionStringProvider)

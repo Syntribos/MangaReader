@@ -31,7 +31,7 @@ public class ScraperProvider : IScraperProvider
         {
             return _scrapers.First(x => x.UrlPattern.IsMatch(url));
         }
-        catch (InvalidOperationException e)
+        catch (InvalidOperationException)
         {
             throw new NoValidScraperException($"No manga providers enabled for URL {url}. Double check the URL was typed correctly. If it was, please report this as a bug.");
         }

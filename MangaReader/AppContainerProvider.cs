@@ -4,11 +4,13 @@ using Data;
 using Data.Implementations;
 using DataManager;
 using DataManager.Implementations;
+using MangaReader.AutofacModules;
 using Models;
 using Utilities;
 using ViewModels;
 using ViewModels.Commands;
 using ViewModels.Commands.CommandImplementations;
+using ViewModels.Managers;
 using Views;
 
 namespace MangaReader;
@@ -31,14 +33,8 @@ public class AppContainerProvider
         builder.Register<IUserInterfaceUpdater>(x => new UserInterfaceUpdater(TaskScheduler.FromCurrentSynchronizationContext()))
             .As<IUserInterfaceUpdater>().SingleInstance();
 
-        builder.RegisterType<ChapterRepository>().As<IChapterRepository>().SingleInstance();
-        builder.RegisterType<SeriesRepository>().As<ISeriesRepository>().SingleInstance();
-        builder.RegisterType<SettingsRepository>().As<ISettingsRepository>().SingleInstance();
-
-        builder.RegisterType<Manager>().As<IManager>().SingleInstance();
-        builder.RegisterType<DatabaseQuerier>().As<IDatabaseQuerier>().SingleInstance();
-        builder.RegisterType<SeriesManager>().As<ISeriesManager>().SingleInstance();
-        builder.RegisterType<SettingsManager>().As<ISettingsManager>().SingleInstance();
+        builder.RegisterType<EventSubscriptionManager>().As<IEventSubscriptionManager>().SingleInstance();
+        builder.RegisterType<ViewStateManager>().As<IViewStateManager>().SingleInstance();
 
         builder.RegisterType<ShowSeriesCommand>().As<IShowSeriesCommand>().SingleInstance();
         builder.RegisterType<CategoryBrowserViewModel>()
@@ -57,6 +53,8 @@ public class AppContainerProvider
 
     private static void RegisterModules(ContainerBuilder builder)
     {
+        builder.RegisterModule<RepositoryModule>();
+        builder.RegisterModule<ManagerModule>();
         builder.RegisterModule<ScraperModule>();
     }
 }

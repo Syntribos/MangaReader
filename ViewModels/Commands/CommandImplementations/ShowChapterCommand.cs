@@ -4,25 +4,25 @@ using Models.CustomEventArgs;
 
 namespace ViewModels.Commands.CommandImplementations
 {
-    public class ShowSeriesCommand : IShowSeriesCommand
+    public class ShowChapterCommand : IShowChapterCommand
     {
         public event EventHandler CanExecuteChanged;
 
-        public event EventHandler<ShowSeriesEventArgs> OnExecute;
+        public event EventHandler<ShowChapterEventArgs> OnExecute;
 
         public bool CanExecute(object parameter)
         {
-            return parameter is ISeriesPreview;
+            return parameter is IChapter;
         }
 
         public void Execute(object parameter)
         {
-            if (!(parameter is ISeriesPreview preview))
+            if (!(parameter is IChapter chapter))
             {
                 return;
             }
 
-            var message = new ShowSeriesEventArgs(preview);
+            var message = new ShowChapterEventArgs(chapter);
             OnExecute?.Invoke(this, message);
         }
     }

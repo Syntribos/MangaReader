@@ -19,12 +19,18 @@
                     <DataTemplate DataType="{x:Type viewModels:ChapterBrowserViewModel}">
                         <local:ChapterBrowserView />
                     </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type viewModels:MangaReaderViewModel}">
+                        <local:MangaRendererView />
+                    </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <ContentControl Content="{Binding CurrentBrowser}"/>
+        <ComboBox x:Name="MyBox"/>
     </Grid>
 </UserControl>

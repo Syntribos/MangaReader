@@ -23,21 +23,21 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
         _cancellationTokenSource.Cancel();
     }
 
-    public async Task<IQueryResult<T>> RunQuery<T>(Func<IManager, CancellationToken, T> dataFunc, CancellationToken cancellationToken)
+    public async Task<IQueryResult<T?>> RunQuery<T>(Func<IManager, CancellationToken, T?> dataFunc, CancellationToken cancellationToken)
     {
         try
         {
             var result = await CreateTask(dataFunc, cancellationToken);
 
-            return new QueryResult<T>(result, true);
+            return new QueryResult<T?>(result, true);
         }
         catch
         {
-            return QueryResult<T>.CreateNonSuccess();
+            return QueryResult<T?>.CreateNonSuccess();
         }
     }
 
-    private Task<T> CreateTask<T>(Func<IManager, CancellationToken, T> dataFunc, CancellationToken token)
+    private Task<T?> CreateTask<T>(Func<IManager, CancellationToken, T> dataFunc, CancellationToken token)
     {
         Contract.RequireNotNull(dataFunc, nameof(dataFunc));
         
@@ -48,7 +48,7 @@ public class DatabaseQuerier : IDatabaseQuerier, IDisposable
 
         var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(_cancellationTokenSource.Token, token);
 
-        var task = new Task<T>(() =>
+        var task = new Task<T?>(() =>
             {
                 if (Closed)
                 {

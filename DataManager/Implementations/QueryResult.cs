@@ -1,6 +1,6 @@
 ﻿namespace DataManager.Implementations;
 
-public class QueryResult<T> : IQueryResult<T>
+public class QueryResult<T> : IQueryResult<T?>
 {
     public QueryResult(T value, bool completed)
     {
@@ -12,8 +12,8 @@ public class QueryResult<T> : IQueryResult<T>
     
     public bool Completed { get; }
 
-    public static IQueryResult<T> CreateNonSuccess()
+    public static IQueryResult<T?> CreateNonSuccess()
     {
-        return new QueryResult<T>(default, false);
+        return new QueryResult<T?>(default(T), false);
     }
 }

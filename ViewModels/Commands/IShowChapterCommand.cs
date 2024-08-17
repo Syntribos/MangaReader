@@ -4,8 +4,8 @@ using Models.CustomEventArgs;
 
 namespace ViewModels.Commands
 {
-    public interface IShowSeriesCommand : ICommand
+    public interface IShowChapterCommand : ICommand
     {
-        event EventHandler<ShowSeriesEventArgs> OnExecute;
+        event EventHandler<ShowChapterEventArgs> OnExecute;
     }
 }

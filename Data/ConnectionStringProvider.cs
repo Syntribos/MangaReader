@@ -7,7 +7,7 @@ public class ConnectionStringProvider : IConnectionStringProvider
 {
     public ConnectionStringProvider(string path)
     {
-        Contract.RequireNotNullOrEmpty(path);
+        Contract.RequireNotNullOrEmpty(path, nameof(path));
 
         DatabasePath = path;
         ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = path, }.ToString();

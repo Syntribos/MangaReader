@@ -27,7 +27,7 @@ namespace ViewModels
             _categories = categories;
             ShowSeriesCommand = showSeriesCommand;
             
-            var path = @"C:\Users\Jess\Desktop\Images\Avatars";
+            var path = @"C:\Users\Jess\Desktop\Important\Images\Avatars";
             var imagePaths = Directory.GetFiles(path);
             var msp = new SeriesPreview(Guid.NewGuid(), "A Cool Series Name", imagePaths.First(), imagePaths.Length, 0);
             DEBUGSetMangaList(new List<ISeriesPreview> { msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, msp, });

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Models;
 using ViewModels.Annotations;
 
 namespace ViewModels
 {
-    public class MangaReaderViewModel : INotifyPropertyChanged
+    public class MangaReaderViewModel : IBrowserView
     {
         private int _currentPageNumber;
         
@@ -15,6 +16,9 @@ namespace ViewModels
         {
             ChapterInfo = mangaInfo;
             _currentPageNumber = 0;
+
+            NextPageCommand = new RelayCommand(GoToNextPage, CanGoToNextPage);
+            PrevPageCommand = new RelayCommand(GoToPrevPage, CanGoToPrevPage);
         }
 
         public IChapter ChapterInfo { get; }
@@ -38,16 +42,30 @@ namespace ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void GoToNextPage()
+        public RelayCommand NextPageCommand { get; private set; }
+
+        public RelayCommand PrevPageCommand { get; private set; }
+
+        private void GoToNextPage()
         {
             _currentPageNumber = Math.Min(_currentPageNumber + 1, NumberOfPages);
             UpdatePageInfo();
         }
-        
-        public void GoToPreviousPage()
+
+        private void GoToPrevPage()
         {
             _currentPageNumber = Math.Max(_currentPageNumber - 1, 0);
             UpdatePageInfo();
+        }
+
+        private bool CanGoToNextPage()
+        {
+            return _currentPageNumber < NumberOfPages;
+        }
+
+        private bool CanGoToPrevPage()
+        {
+            return _currentPageNumber > 0;
         }
 
         public void GoToPage(int pageNumber)
@@ -61,6 +79,9 @@ namespace ViewModels
             OnPropertyChanged(nameof(CurrentPageNumber));
             OnPropertyChanged(nameof(CurrentPage));
             OnPropertyChanged(nameof(ChapterProgress));
+
+            NextPageCommand.NotifyCanExecuteChanged();
+            PrevPageCommand.NotifyCanExecuteChanged();
         }
 
         [NotifyPropertyChangedInvocator]
