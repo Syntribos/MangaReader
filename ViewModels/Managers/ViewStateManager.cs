@@ -31,7 +31,7 @@ public class ViewStateManager : EventSubscriber, IViewStateManager
         SubscriptionManager.Unsubscribe<ShowChapterEventArgs>(this, ShowSeriesEvent);
     }
 
-    private Task ShowSeriesEvent(object sender, ShowChapterEventArgs e)
+    private Task ShowSeriesEvent(object sender, object parameters, ShowChapterEventArgs e)
     {
         return Task.CompletedTask;
     }

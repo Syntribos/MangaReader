@@ -8,7 +8,7 @@ using ViewModels.Annotations;
 
 namespace ViewModels
 {
-    public class MangaReaderViewModel : IBrowserView
+    public class MangaReaderViewModel : BrowserViewModelBase, IPopup
     {
         private int _currentPageNumber;
         

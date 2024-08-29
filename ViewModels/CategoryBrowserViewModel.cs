@@ -12,7 +12,7 @@ using ViewModels.Commands;
 
 namespace ViewModels
 {
-    public class CategoryBrowserViewModel : BrowserViewBase, IInitialBrowserView, ICategoryBrowserViewModel
+    public class CategoryBrowserViewModel : BrowserViewModelBase, IInitialBrowserView, ICategoryBrowserViewModel
     {
         private readonly IDatabaseQuerier _querier;
         private readonly IUserInterfaceUpdater _uiUpdater;

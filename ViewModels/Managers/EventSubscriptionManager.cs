@@ -13,13 +13,25 @@ public class EventSubscriptionManager : IEventSubscriptionManager
 
     public void Subscribe<T>(object subscriber, Func<object, T, Task> handler) where T : EventArgs
     {
+        var sub = EventSubscription<T>.Create(subscriber, handler);
+
         lock (_subscriptions)
         {
-            SubscribeInternal(subscriber, handler);
+            SubscribeInternal(sub);
         }
     }
 
-    public void Unsubscribe<T>(object subscriber, Func<object, T, Task> handler) where T : EventArgs
+    public void Subscribe<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
+    {
+        var sub = EventSubscription<T>.Create(subscriber, handler);
+
+        lock (_subscriptions)
+        {
+            SubscribeInternal(sub);
+        }
+    }
+
+    public void Unsubscribe<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
     {
         lock (_subscriptions)
         {
@@ -27,7 +39,9 @@ public class EventSubscriptionManager : IEventSubscriptionManager
         }
     }
 
-    public async Task Publish<T>(object sender, T eventArgs) where T : EventArgs
+    public async Task Publish<T>(object sender, T eventArgs) where T : EventArgs => await Publish<T>(sender, eventArgs, null);
+
+    public async Task Publish<T>(object sender, object parameters, T eventArgs) where T : EventArgs
     {
         if (eventArgs is null) return;
 
@@ -43,13 +57,11 @@ public class EventSubscriptionManager : IEventSubscriptionManager
             subscriptions = subscriptionsObj;
         }
 
-        await PublishInternal(subscriptions, sender, eventArgs);
+        await PublishInternal(subscriptions, sender, eventArgs, parameters);
     }
 
-    private void SubscribeInternal<T>(object subscriber, Func<object, T, Task> handler) where T : EventArgs
+    private void SubscribeInternal<T>(IEventSubscription<T> sub) where T : EventArgs
     {
-        var sub = EventSubscription<T>.Create(subscriber, handler);
-
         if (!_subscriptions.TryGetValue(typeof(T), out var subscriptions) || subscriptions is null)
         {
             subscriptions = new HashSet<object>();
@@ -59,7 +71,7 @@ public class EventSubscriptionManager : IEventSubscriptionManager
         subscriptions.Add(sub);
     }
 
-    private void UnsubscribeInternal<T>(object subscriber, Func<object, T, Task> handler) where T : EventArgs
+    private void UnsubscribeInternal<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
     {
         if (!_subscriptions.TryGetValue(typeof(T), out var subscriptions) || subscriptions?.Any() == false)
         {
@@ -70,11 +82,11 @@ public class EventSubscriptionManager : IEventSubscriptionManager
         subscriptions.Remove(sub);
     }
 
-    private static async Task PublishInternal<T>(HashSet<object> subscriptions, object sender, T args) where T : EventArgs
+    private static async Task PublishInternal<T>(HashSet<object> subscriptions, object sender, T args, object parameters) where T : EventArgs
     {
         var tasks = subscriptions.Select(x =>
             x is EventSubscription<T> subscription
-                ? subscription.Handler(sender, args)
+                ? subscription.Invoke(sender, parameters, args)
                 : Task.CompletedTask).ToList();
 
         while (tasks.Any())

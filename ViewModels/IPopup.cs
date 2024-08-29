@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models;
-public enum ViewState
+namespace ViewModels;
+public interface IPopup : IBrowserView
 {
-    Series, Library, Category, Chapter
 }

@@ -4,7 +4,7 @@ using ViewModels.Annotations;
 
 namespace ViewModels;
 
-public class BrowserViewBase : IBrowserView
+public class BrowserViewModelBase : IBrowserView
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

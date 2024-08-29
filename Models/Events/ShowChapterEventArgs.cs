@@ -2,10 +2,10 @@
 using System;
 
 namespace Models.CustomEventArgs;
-public class ShowChapterEventArgs : ViewStateChangeEventArgs
+public class ShowChapterEventArgs : ShowPopupEventArgs
 {
     public ShowChapterEventArgs(IChapter chapter)
-        : base(ViewState.Chapter)
+        : base(Popup.Chapter)
     {
         Chapter = chapter;
     }

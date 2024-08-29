@@ -4,7 +4,7 @@ using Models;
 
 namespace ViewModels;
 
-public class ChapterBrowserViewModel : BrowserViewBase
+public class ChapterBrowserViewModel : BrowserViewModelBase
 {
     private readonly ISeries _seriesPreview;
 
