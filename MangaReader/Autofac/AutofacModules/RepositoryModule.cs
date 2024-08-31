@@ -3,8 +3,7 @@ using Data.Implementations;
 using Data;
 using Scrapers;
 
-namespace MangaReader.AutofacModules;
-
+namespace MangaReader.Autofac.AutofacModules;
 public class RepositoryModule : Module
 {
     protected override void Load(ContainerBuilder builder)

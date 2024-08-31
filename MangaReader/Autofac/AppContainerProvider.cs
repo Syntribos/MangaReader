@@ -4,16 +4,18 @@ using Data;
 using Data.Implementations;
 using DataManager;
 using DataManager.Implementations;
-using MangaReader.AutofacModules;
+using MangaReader.Autofac.AutofacModules;
 using Models;
 using Utilities;
 using ViewModels;
 using ViewModels.Commands;
 using ViewModels.Commands.CommandImplementations;
 using ViewModels.Managers;
+using ViewModels.Popups;
 using Views;
+using Views.Popups;
 
-namespace MangaReader;
+namespace MangaReader.Autofac;
 
 public class AppContainerProvider
 {
@@ -41,7 +43,10 @@ public class AppContainerProvider
             .As<ICategoryBrowserViewModel>().As<IInitialBrowserView>()
             .SingleInstance();
         builder.RegisterType<Categories>().SingleInstance();
-        
+
+        builder.RegisterType<PopupBuilder>().As<IPopupBuilder>().SingleInstance();
+        builder.RegisterType<PopupManager>().As<IPopupManager>().SingleInstance();
+
         builder.RegisterType<BrowserViewModel>().SingleInstance();
         builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
         builder.RegisterType<MainWindow>().SingleInstance();

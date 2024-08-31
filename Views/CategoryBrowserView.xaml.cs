@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,12 +15,9 @@ namespace Views
             InitializeComponent();
         }
 
-        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (SeriesTileListBox.SelectedItem is ISeriesPreview seriesPreview)
-            {
-                var series = seriesPreview.ToSeries(new HashSet<IChapterPreview>());
-            }
+            Console.WriteLine("Asd");
         }
     }
 }

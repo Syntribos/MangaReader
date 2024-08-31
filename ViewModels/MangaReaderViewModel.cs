@@ -38,9 +38,13 @@ namespace ViewModels
 
         public int NumberOfPages => ChapterInfo.PageCount;
 
-        public string CurrentPage => ChapterInfo.GetPagePath(_currentPageNumber);
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string CurrentPage
+        {
+            get
+            {
+                return ChapterInfo.GetPagePath(_currentPageNumber);
+            }
+        }
 
         public RelayCommand NextPageCommand { get; private set; }
 
@@ -82,12 +86,6 @@ namespace ViewModels
 
             NextPageCommand.NotifyCanExecuteChanged();
             PrevPageCommand.NotifyCanExecuteChanged();
-        }
-
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

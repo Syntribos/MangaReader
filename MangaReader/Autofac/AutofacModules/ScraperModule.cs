@@ -1,8 +1,7 @@
 ﻿using Autofac;
 using Scrapers;
 
-namespace MangaReader.AutofacModules;
-
+namespace MangaReader.Autofac.AutofacModules;
 public class ScraperModule : Module
 {
     protected override void Load(ContainerBuilder builder)

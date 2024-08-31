@@ -7,8 +7,5 @@ public partial class BrowserView : UserControl
     public BrowserView()
     {
         InitializeComponent();
-
-
-        MyBox.SelectedItem = null;
     }
 }

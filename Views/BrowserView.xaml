@@ -31,6 +31,6 @@
 
     <Grid>
         <ContentControl Content="{Binding CurrentBrowser}"/>
-        <ComboBox x:Name="MyBox"/>
+        <TextBlock x:Name="MyBox" Text="BrowserView Test Text"/>
     </Grid>
 </UserControl>

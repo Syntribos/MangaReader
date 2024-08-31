@@ -1,4 +1,5 @@
-﻿using Models.CustomEventArgs;
+﻿using Models;
+using Models.CustomEventArgs;
 using Models.Events;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utilities;
+using ViewModels.Popups;
 
 namespace ViewModels.Managers;
 public class ViewStateManager : EventSubscriber, IViewStateManager
@@ -23,16 +25,18 @@ public class ViewStateManager : EventSubscriber, IViewStateManager
 
     protected override void Subscribe()
     {
-        SubscriptionManager.Subscribe<ShowChapterEventArgs>(this, ShowSeriesEvent);
+        SubscriptionManager.Subscribe<ShowChapterEventArgs>(this, ShowChapterEvent);
     }
 
     protected override void Unsubscribe()
     {
-        SubscriptionManager.Unsubscribe<ShowChapterEventArgs>(this, ShowSeriesEvent);
+        SubscriptionManager.Unsubscribe<ShowChapterEventArgs>(this, ShowChapterEvent);
     }
 
-    private Task ShowSeriesEvent(object sender, object parameters, ShowChapterEventArgs e)
+    private async Task ShowChapterEvent(object sender, ShowChapterEventArgs e)
     {
-        return Task.CompletedTask;
+        var popupInfo = PopupInfo.FromEventArgs(e);
+
+        await SubscriptionManager.Publish(this, new ShowPopupEventArgs(Popup.Chapter), popupInfo);
     }
 }

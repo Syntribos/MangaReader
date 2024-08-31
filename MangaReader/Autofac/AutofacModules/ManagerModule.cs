@@ -5,8 +5,7 @@ using Scrapers;
 using DataManager.Implementations;
 using DataManager;
 
-namespace MangaReader.AutofacModules;
-
+namespace MangaReader.Autofac.AutofacModules;
 public class ManagerModule : Module
 {
     protected override void Load(ContainerBuilder builder)

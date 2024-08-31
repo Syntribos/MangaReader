@@ -13,6 +13,7 @@ using ViewModels.Commands;
 using ViewModels.Managers;
 using System.Threading.Tasks;
 using Models.CustomEventArgs;
+using MangaReader.Autofac;
 
 namespace MangaReader;
 
@@ -26,14 +27,14 @@ public partial class App
         @"https://mangadex.org/title/ffe69cc2-3f9e-4eab-a7f7-c963cea9ec25/lonely-attack-on-a-different-world";
 
     private readonly AppContainerProvider _appContainerProvider = new(DB_PATH);
+    private readonly LifetimeScope _lifetimeScope = new LifetimeScope();
 
     private MainWindow _mainWindow;
 
     private void Application_Startup(object sender, StartupEventArgs e)
     {
         var container = _appContainerProvider.BuildAppContainer();
-
-        //ScraperTest(container);
+        _lifetimeScope.BuildLifetime(container);
 
         _mainWindow = container.Resolve<MainWindow>();
         Current.MainWindow = _mainWindow;

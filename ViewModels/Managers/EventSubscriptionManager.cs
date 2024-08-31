@@ -31,17 +31,29 @@ public class EventSubscriptionManager : IEventSubscriptionManager
         }
     }
 
-    public void Unsubscribe<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
+    public void Unsubscribe<T>(object subscriber, Func<object, T, Task> handler) where T : EventArgs
     {
+        var sub = EventSubscription<T>.Create(subscriber, handler);
+
         lock (_subscriptions)
         {
-            UnsubscribeInternal(subscriber, handler);
+            UnsubscribeInternal(sub);
+        }
+    }
+
+    public void Unsubscribe<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
+    {
+        var sub = EventSubscription<T>.Create(subscriber, handler);
+
+        lock (_subscriptions)
+        {
+            UnsubscribeInternal(sub);
         }
     }
 
     public async Task Publish<T>(object sender, T eventArgs) where T : EventArgs => await Publish<T>(sender, eventArgs, null);
 
-    public async Task Publish<T>(object sender, object parameters, T eventArgs) where T : EventArgs
+    public async Task Publish<T>(object sender, T eventArgs, object parameters) where T : EventArgs
     {
         if (eventArgs is null) return;
 
@@ -71,14 +83,13 @@ public class EventSubscriptionManager : IEventSubscriptionManager
         subscriptions.Add(sub);
     }
 
-    private void UnsubscribeInternal<T>(object subscriber, Func<object, object, T, Task> handler) where T : EventArgs
+    private void UnsubscribeInternal<T>(IEventSubscription<T> sub) where T : EventArgs
     {
         if (!_subscriptions.TryGetValue(typeof(T), out var subscriptions) || subscriptions?.Any() == false)
         {
             return;
         }
 
-        var sub = EventSubscription<T>.Create(subscriber, handler);
         subscriptions.Remove(sub);
     }
 
