@@ -40,7 +40,7 @@ public partial class App
         Current.MainWindow = _mainWindow;
         _mainWindow.Show();
 
-        var path = @"C:\Users\Jess\Desktop\Important\Images\Avatars";
+        var path = @"C:\Users\Josh\.runelite\screenshots\Kambabam\Clue Scroll Rewards";
         var imagePaths = Directory.GetFiles(path);
         var mc = new MangaChapter("Chapter Gay", 17, path, imagePaths);
 

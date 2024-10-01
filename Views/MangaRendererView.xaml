@@ -38,11 +38,8 @@
         </Grid>
         
         <!-- Grid for image display -->
-        <Grid Column="0" Row="0" ZIndex="0">
-            <Grid.Background>
-                <ImageBrush ImageSource="{Binding Path=CurrentPage}" Stretch="Uniform"/>
-            </Grid.Background>
-        </Grid>
-        
+        <Canvas ZIndex="0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="100" Grid.RowSpan="100">
+            <Image Source="{Binding CurrentPage}" Stretch="Uniform" StretchDirection="Both"/>
+        </Canvas>
     </Grid>
 </UserControl>
