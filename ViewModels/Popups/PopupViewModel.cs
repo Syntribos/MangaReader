@@ -13,4 +13,8 @@ public class PopupHostViewModel : BrowserViewModelBase, IPopup
     }
 
     public IPopup Popup { get; set; }
+    
+    public int Height { get; set; }
+    
+    public int Width { get; set; }
 }

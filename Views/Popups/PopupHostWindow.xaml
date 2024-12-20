@@ -3,11 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Views.Popups"
         xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
         xmlns:vws="clr-namespace:Views"
+        xmlns:popups="clr-namespace:ViewModels.Popups;assembly=ViewModels"
         mc:Ignorable="d"
-        Title="PopupHost" Height="450" Width="800">
+        Title="PopupHost"
+        d:DataContext="{d:DesignInstance popups:IPopup}"
+        Height="{Binding Path=Height, Mode=TwoWay}"
+        Width="{Binding Path=Width, Mode=TwoWay}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
