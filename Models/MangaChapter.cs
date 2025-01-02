@@ -19,7 +19,7 @@ namespace Models
         }
 
         public MangaChapter(string chapterName, int chapterNumber, string basePath, string[] fileNames)
-        : this(chapterName, chapterNumber, basePath, fileNames, Path.Combine(basePath, fileNames.First()))
+        : this(chapterName, chapterNumber, basePath, fileNames, Path.Combine(basePath, fileNames.FirstOrDefault()))
         {
         }
         
