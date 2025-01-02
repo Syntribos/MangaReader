@@ -10,7 +10,7 @@ public class PopupBuilder : IPopupBuilder
 {
     public bool CanBuild(object popupInfo)
     {
-        return popupInfo is IPopupInfo info ? CanBuild(info) : false;
+        return popupInfo is IPopupInfo info && CanBuild(info);
     }
 
     public bool CanBuild(IPopupInfo popupInfo)
@@ -27,7 +27,7 @@ public class PopupBuilder : IPopupBuilder
     {
         if (popupInfo.PopupType is Popup.Chapter)
         {
-            return new MangaReaderViewModel(popupInfo.ToChapter());
+            return new MangaReaderViewModel(popupInfo.ToChapter(), 300, 300);
         }
 
         return null;

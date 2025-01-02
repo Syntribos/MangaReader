@@ -1,24 +1,57 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Models;
-using ViewModels.Annotations;
+using ViewModels.Popups;
 
 namespace ViewModels
 {
     public class MangaReaderViewModel : BrowserViewModelBase, IPopup
     {
         private int _currentPageNumber;
+        private int _height;
+        private int _width;
         
-        public MangaReaderViewModel(IChapter mangaInfo)
+        public MangaReaderViewModel(IChapter mangaInfo, int height, int width)
         {
             ChapterInfo = mangaInfo;
             _currentPageNumber = 0;
+            Height = height;
+            Width = width;
 
             NextPageCommand = new RelayCommand(GoToNextPage, CanGoToNextPage);
             PrevPageCommand = new RelayCommand(GoToPrevPage, CanGoToPrevPage);
+        }
+
+        public int Height
+        {
+            get => _height;
+
+            set
+            {
+                if (_height == value)
+                {
+                    return;
+                }
+                
+                _height = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int Width
+        {
+            get => _width;
+            
+            set
+            {
+                if (_width == value)
+                {
+                    return;
+                }
+                
+                _width = value;
+                OnPropertyChanged();
+            }
         }
 
         public IChapter ChapterInfo { get; }
