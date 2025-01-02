@@ -32,5 +32,6 @@
     <Grid>
         <ContentControl Content="{Binding CurrentBrowser}"/>
         <TextBlock x:Name="MyBox" Text="BrowserView Test Text"/>
+        <Button x:Name="Debugton" Width="100" Height="100" Command="{Binding Debugton}">Spawn popup</Button>
     </Grid>
 </UserControl>

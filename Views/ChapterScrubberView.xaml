@@ -9,7 +9,7 @@
              d:DesignHeight="50" d:DesignWidth="200">
     <Border x:Name="pageScrubberBorder" Background="Transparent">
         <Grid Background="Teal">
-            <TextBlock Text="This is a chapter scrubber" VerticalAlignment="Center" TextAlignment="Center"/>
+            <Slider Minimum="1" Maximum="{Binding NumberOfPages}" TickFrequency="1" Value="{Binding CurrentPageNumber}" SmallChange="1" LargeChange="1" TickPlacement="TopLeft"/>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Hidden"/>

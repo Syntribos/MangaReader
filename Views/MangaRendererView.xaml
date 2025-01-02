@@ -9,22 +9,6 @@
         d:DataContext="{d:DesignInstance vm:MangaReaderViewModel, IsDesignTimeCreatable=False}"
         Width="{Binding Width}"
         Height="{Binding Height}">
-    <UserControl.Resources>
-        <Style TargetType="RowDefinition" x:Key="AutoRow">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ChapterProgress, UpdateSourceTrigger=PropertyChanged}">
-                    <Setter Property="Height" Value="Auto"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="RowDefinition" x:Key="StarRow">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ChapterProgress, UpdateSourceTrigger=PropertyChanged}">
-                    <Setter Property="Height" Value="*"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
     <Grid Width="{Binding Width, UpdateSourceTrigger=PropertyChanged}"
           Height="{Binding Height, UpdateSourceTrigger=PropertyChanged}">
         <Grid.ColumnDefinitions>
@@ -45,28 +29,30 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Style="{StaticResource StarRow}"/>
-                <RowDefinition Style="{StaticResource AutoRow}"/>
-                <RowDefinition Style="{StaticResource AutoRow}"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="44"/>
             </Grid.RowDefinitions>
+            <Canvas ZIndex="0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                Width="{Binding Width}"
+                Height="{Binding Height}">
+                <Image
+                    x:Name="MyImage" 
+                    Source="{Binding CurrentPage}"
+                    Stretch="Uniform"
+                    Width="{Binding Width}"
+                    Height="{Binding Height}" />
+            </Canvas>
             <Button x:Name="LeftButton" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Command="{Binding Path=PrevPageCommand}" Opacity="0" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
             <views:ChapterScrubberView Grid.Row="1" Grid.Column="1"/>
             <Grid Grid.Column="1" Grid.Row="2">
-                <TextBlock Background="Black" TextWrapping="NoWrap" FontSize="16" Visibility="Visible" Opacity="100" Margin="0,5,0,5" Text="{Binding ChapterProgress}" TextAlignment="Center" Foreground="LightGray"/>
+                <TextBlock Background="Black" Height="24" TextWrapping="NoWrap" FontSize="16" Visibility="Visible" Opacity="100" Text="{Binding ChapterProgress}" TextAlignment="Center" Foreground="LightGray"/>
             </Grid>
             <Button x:Name="RightButton" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Command="{Binding Path=NextPageCommand}" Opacity="0" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
         </Grid>
         
         <!-- Grid for image display -->
-        <Canvas ZIndex="0" Grid.Column="0" Grid.Row="0"
-                Width="{Binding Width}"
-                Height="{Binding Height}">
-            <Image
-                x:Name="MyImage" 
-                Source="{Binding CurrentPage}"
-                Stretch="Uniform"
-                Width="{Binding Width}"
-                Height="{Binding Height}" />
-        </Canvas>
+        
     </Grid>
 </UserControl>
