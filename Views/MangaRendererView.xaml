@@ -30,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="24"/>
                 <RowDefinition Height="44"/>
             </Grid.RowDefinitions>
@@ -45,14 +45,11 @@
                     Height="{Binding Height}" />
             </Canvas>
             <Button x:Name="LeftButton" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Command="{Binding Path=PrevPageCommand}" Opacity="0" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
-            <views:ChapterScrubberView Grid.Row="1" Grid.Column="1"/>
             <Grid Grid.Column="1" Grid.Row="2">
                 <TextBlock Background="Black" Height="24" TextWrapping="NoWrap" FontSize="16" Visibility="Visible" Opacity="100" Text="{Binding ChapterProgress}" TextAlignment="Center" Foreground="LightGray"/>
             </Grid>
             <Button x:Name="RightButton" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Command="{Binding Path=NextPageCommand}" Opacity="0" BorderThickness="0" FocusVisualStyle="{x:Null}"/>
+            <views:ChapterScrubberView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="Auto" Height="Auto"/>
         </Grid>
-        
-        <!-- Grid for image display -->
-        
     </Grid>
 </UserControl>

@@ -27,7 +27,7 @@ public class PopupBuilder : IPopupBuilder
     {
         if (popupInfo.PopupType is Popup.Chapter)
         {
-            return new MangaReaderViewModel(popupInfo.ToChapter(), 300, 300);
+            return new MangaReaderViewModel(popupInfo.ToChapter(), 1000, 480);
         }
 
         return null;

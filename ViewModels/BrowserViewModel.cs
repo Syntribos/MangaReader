@@ -63,7 +63,7 @@ public class BrowserViewModel : INotifyPropertyChanged
 
     private async void Debbie()
     {
-        var path = @"C:\Users\Jess\.runelite\screenshots\Kambabam\Clue Scroll Rewards";
+        var path = @"C:\Users\Jess\Desktop\Important\Wallpapers";
         var imagePaths = Directory.GetFiles(path);
         var mc = new MangaChapter("Chapter Gay", 17, path, imagePaths);
         await _eventSubscriptionManager.Publish(this, new ShowChapterEventArgs(mc));

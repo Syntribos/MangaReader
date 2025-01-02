@@ -8,10 +8,19 @@
              Width="100"
              d:DesignHeight="50" d:DesignWidth="200">
     <Border x:Name="pageScrubberBorder" Background="Transparent">
-        <Grid Background="Teal">
-            <Slider Minimum="1" Maximum="{Binding NumberOfPages}" TickFrequency="1" Value="{Binding CurrentPageNumber}" SmallChange="1" LargeChange="1" TickPlacement="TopLeft"/>
-            <Grid.Style>
-                <Style TargetType="Grid">
+        <Slider
+            Minimum="0"
+            Maximum="{Binding NumberOfPages}"
+            TickFrequency="1"
+            Value="{Binding CurrentPageNumber}"
+            SmallChange="1"
+            LargeChange="10"
+            TickPlacement="TopLeft"
+            Background="AliceBlue"
+            Width="300"
+            Height="36">
+            <Slider.Style>
+                <Style TargetType="Slider">
                     <Setter Property="Visibility" Value="Hidden"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=pageScrubberBorder, Path=IsMouseOver}" Value="True">
@@ -19,7 +28,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </Grid.Style>
-        </Grid>
+            </Slider.Style>
+        </Slider>
     </Border>
 </UserControl>
