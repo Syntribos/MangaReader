@@ -26,6 +26,10 @@ public class BrowserViewModel : INotifyPropertyChanged
 
     private IBrowserView _currentBrowser;
 
+#if DEBUG
+    public BrowserViewModel() { }
+#endif
+
     public BrowserViewModel(IInitialBrowserView browserView, IViewStateManager viewStateManager, IDatabaseQuerier querier, IEventSubscriptionManager eventSubscriptionManager)
     {
         _seriesBrowser = browserView;

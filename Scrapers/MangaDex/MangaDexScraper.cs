@@ -2,7 +2,7 @@
 using DataManager;
 using Utilities;
 
-namespace Scrapers;
+namespace Scrapers.MangaDex;
 
 public class MangaDexScraper : IScraper
 {

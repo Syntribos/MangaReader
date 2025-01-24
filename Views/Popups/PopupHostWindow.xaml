@@ -23,6 +23,6 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <UserControl x:Name="Content" Content="{Binding}"/>
+        <UserControl x:Name="PopupContent" Content="{Binding}"/>
     </Grid>
 </Window>
