@@ -1,6 +1,8 @@
 ﻿using System;
+
 using Models;
 using Models.CustomEventArgs;
+using ViewModels.Events;
 
 namespace ViewModels.Commands.CommandImplementations
 {

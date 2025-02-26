@@ -1,11 +1,12 @@
-﻿using Models;
-using Models.CustomEventArgs;
-using Models.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Models;
+using Models.CustomEventArgs;
+using ViewModels.Events;
 
 namespace ViewModels.Popups;
 public class PopupInfo : IPopupInfo

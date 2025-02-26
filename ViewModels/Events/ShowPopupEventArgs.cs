@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Events;
+namespace ViewModels.Events;
+
 public class ShowPopupEventArgs : EventArgs
 {
     public ShowPopupEventArgs(Popup popupType)

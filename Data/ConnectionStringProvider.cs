@@ -5,12 +5,10 @@ namespace Data;
 
 public class ConnectionStringProvider : IConnectionStringProvider
 {
-    public ConnectionStringProvider(string path)
+    public ConnectionStringProvider()
     {
-        Contract.RequireNotNullOrEmpty(path, nameof(path));
-
-        DatabasePath = path;
-        ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = path, }.ToString();
+        DatabasePath = SqlConstants.DATABASE_PATH;
+        ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = DatabasePath, }.ToString();
     }
     
     public string DatabasePath { get; }

@@ -16,13 +16,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{068F177B-49C2-4A61-92D5-4C7E1B0E6E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{2E0515F4-6FAD-4BDA-89DC-39DBEDF36E09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{2E0515F4-6FAD-4BDA-89DC-39DBEDF36E09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{9DC755F8-11A9-4915-A8DD-BC7A51F2ECC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{8F91DF3B-C50B-4631-B66D-56D8D034B19D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManager", "DataManager\DataManager.csproj", "{8F91DF3B-C50B-4631-B66D-56D8D034B19D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrapers", "Scrapers\Scrapers.csproj", "{4534701A-3327-4E99-8EF0-1B4C318EDF84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scrapers", "Scrapers\Scrapers.csproj", "{4534701A-3327-4E99-8EF0-1B4C318EDF84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Cli", "MangaReader.Cli\MangaReader.Cli.csproj", "{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Autofac", "MangaReader.Autofac\MangaReader.Autofac.csproj", "{ECEAE585-5F69-4FDB-A312-D92DBF325D46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging", "Messaging\Messaging.csproj", "{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,13 +68,23 @@ Global
 		{4534701A-3327-4E99-8EF0-1B4C318EDF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4534701A-3327-4E99-8EF0-1B4C318EDF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4534701A-3327-4E99-8EF0-1B4C318EDF84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECEAE585-5F69-4FDB-A312-D92DBF325D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECEAE585-5F69-4FDB-A312-D92DBF325D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECEAE585-5F69-4FDB-A312-D92DBF325D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECEAE585-5F69-4FDB-A312-D92DBF325D46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DB2DC7D-AB46-404B-BA8F-1D04099E8F9D}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

@@ -5,7 +5,7 @@ using System.Windows;
 
 using Utilities;
 
-namespace MangaReader;
+namespace ViewModels;
 
 public class UserInterfaceUpdater : IUserInterfaceUpdater
 {

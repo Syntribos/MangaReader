@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Models.CustomEventArgs;
+using ViewModels.Events;
 
 namespace ViewModels.Commands
 {

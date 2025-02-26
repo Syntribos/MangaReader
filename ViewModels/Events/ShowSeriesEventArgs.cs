@@ -1,7 +1,7 @@
-﻿using Models.Events;
+﻿using Models;
 using System;
 
-namespace Models.CustomEventArgs;
+namespace ViewModels.Events;
 public class ShowSeriesEventArgs : ViewStateChangeEventArgs
 {
     public ShowSeriesEventArgs(ISeriesPreview preview)

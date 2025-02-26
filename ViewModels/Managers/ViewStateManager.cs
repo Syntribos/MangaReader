@@ -1,15 +1,18 @@
-﻿using Models;
-using Models.CustomEventArgs;
-using Models.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Messaging;
+using Models;
+using Models.CustomEventArgs;
 using Utilities;
+using ViewModels.Events;
 using ViewModels.Popups;
 
 namespace ViewModels.Managers;
+
 public class ViewStateManager : EventSubscriber, IViewStateManager
 {
     public ViewStateManager(IEventSubscriptionManager subscriptionManager)

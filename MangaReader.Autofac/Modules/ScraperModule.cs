@@ -3,6 +3,7 @@ using Scrapers;
 using Scrapers.MangaDex;
 
 namespace MangaReader.Autofac.AutofacModules;
+
 public class ScraperModule : Module
 {
     protected override void Load(ContainerBuilder builder)

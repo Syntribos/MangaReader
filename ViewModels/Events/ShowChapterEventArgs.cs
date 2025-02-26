@@ -1,7 +1,8 @@
-﻿using Models.Events;
+﻿using Models;
 using System;
 
-namespace Models.CustomEventArgs;
+namespace ViewModels.Events;
+
 public class ShowChapterEventArgs : ShowPopupEventArgs
 {
     public ShowChapterEventArgs(IChapter chapter)

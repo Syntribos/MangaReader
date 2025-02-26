@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using Data.Implementations;
 using Data;
-using Scrapers;
 using DataManager.Implementations;
 using DataManager;
 
 namespace MangaReader.Autofac.AutofacModules;
+
 public class ManagerModule : Module
 {
     protected override void Load(ContainerBuilder builder)
