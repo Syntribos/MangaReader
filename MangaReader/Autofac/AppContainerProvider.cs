@@ -22,23 +22,15 @@ public class AppContainerProvider
 {
     public static IContainer BuildAppContainer()
     {
-        var builder = new ContainerBuilder();
+        var builder = SharedContainerProvider.CreateSharedBuilder();
 
-        builder.RegisterType<Categories>().SingleInstance();
-
-        RegisterModules(builder);
+        RegisterUiModules(builder);
 
         return builder.Build();
     }
 
-    private static void RegisterModules(ContainerBuilder builder)
+    private static void RegisterUiModules(ContainerBuilder builder)
     {
-        // Global modules
-        builder.RegisterModule<MessagingModule>();
-        builder.RegisterModule<RepositoryModule>();
-        builder.RegisterModule<ManagerModule>();
-        builder.RegisterModule<ScraperModule>();
-
         // UI Modules
         builder.RegisterModule<InterfaceManagerModule>();
         builder.RegisterModule<BrowserModule>();

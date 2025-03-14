@@ -14,7 +14,7 @@ internal class LifetimeScope
 
     public LifetimeScope()
     {
-        _held = new HashSet<object>();
+        _held = [];
     }
 
     internal void BuildLifetime(IContainer container)

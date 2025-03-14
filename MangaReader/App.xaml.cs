@@ -27,7 +27,7 @@ public partial class App
         @"https://mangadex.org/title/ffe69cc2-3f9e-4eab-a7f7-c963cea9ec25/lonely-attack-on-a-different-world";
 
     private readonly AppContainerProvider _appContainerProvider = new();
-    private readonly LifetimeScope _lifetimeScope = new LifetimeScope();
+    private readonly LifetimeScope _lifetimeScope = new();
 
     private MainWindow _mainWindow;
 

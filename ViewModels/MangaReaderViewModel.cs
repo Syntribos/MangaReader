@@ -62,12 +62,12 @@ namespace ViewModels
 
             set
             {
-                _currentPageNumber = value;
+                _currentPageNumber = value - 1;
                 UpdatePageInfo();
             }
         }
 
-        public string ChapterProgress => $"{CurrentPageNumber}/{NumberOfPages + 1}";
+        public string ChapterProgress => $"{CurrentPageNumber}/{NumberOfPages}";
 
         public int NumberOfPages => ChapterInfo.PageCount;
 
