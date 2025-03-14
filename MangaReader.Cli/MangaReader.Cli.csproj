@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MangaReader.Autofac\MangaReader.Autofac.csproj" />
+  </ItemGroup>
+
 </Project>

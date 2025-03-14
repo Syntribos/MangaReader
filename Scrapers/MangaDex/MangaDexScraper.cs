@@ -1,12 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using DataManager;
+using Models;
 using Utilities;
+using System.Reflection;
+using System.Net;
 
 namespace Scrapers.MangaDex;
 
 public class MangaDexScraper : IScraper
 {
     private readonly IDatabaseQuerier _querier;
+    private static readonly HttpClient _client = new();
 
     public MangaDexScraper(IDatabaseQuerier querier)
     {
@@ -28,6 +35,26 @@ public class MangaDexScraper : IScraper
         }
 
         return false;
+    }
+
+    public async Task<IEnumerable<ISeriesPreview>> Search<T>(T query)
+    {
+        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+        _client.BaseAddress = new Uri(ApiConstants.API_URL);
+        _client.DefaultRequestHeaders.Accept.Clear();
+        _client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+        var userAgent = new ProductInfoHeaderValue(new ProductHeaderValue("JessMangaReader", "a0.0.1"));
+        _client.DefaultRequestHeaders.UserAgent.Add(userAgent);
+
+        var res = await _client.GetAsync("/manga?limit=1");
+        string result = string.Empty;
+        if (res.IsSuccessStatusCode)
+        {
+            result = await res.Content.ReadAsStringAsync();
+        }
+        Console.WriteLine(result);
+        return new List<ISeriesPreview> { new SeriesPreview(Guid.NewGuid(), "Test", "TestPath", 12, 12) };
     }
 
     public bool Equals(IScraper? other)
