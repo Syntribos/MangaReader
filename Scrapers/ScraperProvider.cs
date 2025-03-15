@@ -3,17 +3,10 @@ using Scrapers.Exceptions;
 
 namespace Scrapers;
 
-public class ScraperProvider : IScraperProvider
+public class ScraperProvider(IEnumerable<IScraper> scrapers) : IScraperProvider
 {
-    private readonly IDictionary<string, IScraper> _map;
-    private readonly HashSet<IScraper> _scrapers;
-
-    public ScraperProvider(IEnumerable<IScraper> scrapers)
-    {
-        scrapers = scrapers.ToList();
-        _map = scrapers.ToDistinctDictionary(x => x.Key, x => x);
-        _scrapers = new HashSet<IScraper>(scrapers);
-    }
+    private readonly IDictionary<string, IScraper> _map = scrapers.ToDistinctDictionary(x => x.Key, x => x);
+    private readonly HashSet<IScraper> _scrapers = [.. scrapers];
 
     public IScraper GetByKey(string key)
     {

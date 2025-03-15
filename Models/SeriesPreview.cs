@@ -3,26 +3,22 @@ using System.Collections.Generic;
 
 namespace Models;
 
-public class SeriesPreview : ISeriesPreview
+public class SeriesPreview(Guid id, string title, string previewImagePath, int chapterCount, int unreadChapterCount) : ISeriesPreview
 {
-    public SeriesPreview(Guid id, string title, string previewImagePath, int chapterCount, int unreadChapterCount)
+    public SeriesPreview(Guid id, string title, string previewImagePath, int chapterCount)
+    : this(id, title, previewImagePath, chapterCount, chapterCount)
     {
-        Id = id;
-        Title = title;
-        PreviewImagePath = previewImagePath;
-        ChapterCount = chapterCount;
-        UnreadChapterCount = unreadChapterCount;
     }
 
-    public Guid Id { get; }
+    public Guid Id { get; } = id;
 
-    public string Title { get; }
+    public string Title { get; } = title;
 
-    public string PreviewImagePath { get; }
-    
-    public int ChapterCount { get; }
-    
-    public int UnreadChapterCount { get; }
+    public string PreviewImagePath { get; } = previewImagePath;
+
+    public int ChapterCount { get; } = chapterCount;
+
+    public int UnreadChapterCount { get; } = unreadChapterCount;
 
     public ISeries ToSeries(HashSet<IChapterPreview> chapterPreviews)
     {

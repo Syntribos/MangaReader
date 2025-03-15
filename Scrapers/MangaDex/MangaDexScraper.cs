@@ -7,24 +7,27 @@ using Models;
 using Utilities;
 using System.Reflection;
 using System.Net;
+using Scrapers.MangaDex.ApiObjects;
+using System.Text.Json;
 
 namespace Scrapers.MangaDex;
 
 public class MangaDexScraper : IScraper
 {
     private readonly IDatabaseQuerier _querier;
-    private static readonly HttpClient _client = new();
+    private readonly ApiClient _client;
 
-    public MangaDexScraper(IDatabaseQuerier querier)
+    public MangaDexScraper(IDatabaseQuerier querier, ApiClient apiClient)
     {
         Contract.RequireNotNull(querier, nameof(querier));
 
         _querier = querier;
+        _client = apiClient;
     }
 
     public string Key => nameof(MangaDexScraper);
 
-    public Regex UrlPattern => new Regex(@"mangadex\.org\/title\/([^\W_]{8}-[^\W_]{4}-[^\W_]{4}-[^\W_]{4}-[^\W_]{12})\/[\w-]*", RegexOptions.IgnoreCase);
+    public Regex UrlPattern => new Regex(@"mangadex\.org", RegexOptions.IgnoreCase);
 
     public bool AddManga(string url)
     {
@@ -39,22 +42,18 @@ public class MangaDexScraper : IScraper
 
     public async Task<IEnumerable<ISeriesPreview>> Search<T>(T query)
     {
-        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
-        _client.BaseAddress = new Uri(ApiConstants.API_URL);
-        _client.DefaultRequestHeaders.Accept.Clear();
-        _client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-        var userAgent = new ProductInfoHeaderValue(new ProductHeaderValue("JessMangaReader", "a0.0.1"));
-        _client.DefaultRequestHeaders.UserAgent.Add(userAgent);
-
         var res = await _client.GetAsync("/manga?limit=1");
         string result = string.Empty;
+        MangaResponse? mangaResults = null;
+        IEnumerable<ISeriesPreview>? mangaList = null;
         if (res.IsSuccessStatusCode)
         {
             result = await res.Content.ReadAsStringAsync();
+            mangaResults = JsonSerializer.Deserialize<MangaResponse>(result);
+            mangaList = mangaResults?.ToSeriesPreviews().ToList() ?? [];
         }
-        Console.WriteLine(result);
-        return new List<ISeriesPreview> { new SeriesPreview(Guid.NewGuid(), "Test", "TestPath", 12, 12) };
+        
+        return mangaList ?? [];
     }
 
     public bool Equals(IScraper? other)

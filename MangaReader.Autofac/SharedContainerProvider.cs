@@ -12,9 +12,6 @@ namespace MangaReader.Autofac;
 
 public class SharedContainerProvider
 {
-    public static IContainer BuildAppContainer()
-        => CreateSharedBuilder().Build();
-
     public static ContainerBuilder CreateSharedBuilder()
     {
         var builder = new ContainerBuilder();

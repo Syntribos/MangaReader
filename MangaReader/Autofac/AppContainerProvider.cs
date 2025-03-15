@@ -23,6 +23,7 @@ public class AppContainerProvider
     public static IContainer BuildAppContainer()
     {
         var builder = SharedContainerProvider.CreateSharedBuilder();
+        builder.RegisterType<VersionProvider>().As<IVersionProvider>();
 
         RegisterUiModules(builder);
 
