@@ -15,14 +15,14 @@ namespace Scrapers.MangaDex;
 public class MangaDexScraper : IScraper
 {
     private readonly IDatabaseQuerier _querier;
-    private readonly ApiClient _client;
+    private readonly IApiClientProvider _clientProvider;
 
-    public MangaDexScraper(IDatabaseQuerier querier, ApiClient apiClient)
+    public MangaDexScraper(IDatabaseQuerier querier, IApiClientProvider clientProvider)
     {
         Contract.RequireNotNull(querier, nameof(querier));
 
         _querier = querier;
-        _client = apiClient;
+        _clientProvider = clientProvider;
     }
 
     public string Key => nameof(MangaDexScraper);
@@ -40,9 +40,12 @@ public class MangaDexScraper : IScraper
         return false;
     }
 
+    // This is pretty untestable. Maybe implement a proper search pipeline?
+    // Query > endpoint > result manipualtion/parsing?
     public async Task<IEnumerable<ISeriesPreview>> Search<T>(T query)
     {
-        var res = await _client.GetAsync("/manga?limit=1");
+        var client = _clientProvider.GetClient();
+        var res = await client.GetAsync("/manga?limit=1");
         string result = string.Empty;
         MangaResponse? mangaResults = null;
         IEnumerable<ISeriesPreview>? mangaList = null;

@@ -24,11 +24,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManager", "DataManager\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scrapers", "Scrapers\Scrapers.csproj", "{4534701A-3327-4E99-8EF0-1B4C318EDF84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader.Cli", "MangaReader.Cli\MangaReader.Cli.csproj", "{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Cli", "MangaReader.Cli\MangaReader.Cli.csproj", "{5F2E95AB-D7D8-4926-822B-D4D86B402E5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaReader.Autofac", "MangaReader.Autofac\MangaReader.Autofac.csproj", "{ECEAE585-5F69-4FDB-A312-D92DBF325D46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging", "Messaging\Messaging.csproj", "{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging", "Messaging\Messaging.csproj", "{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1D63040A-3381-482F-BDB4-3817BACD82D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapersTests", "Tests\ScrapersTests\ScrapersTests.csproj", "{0CA6119C-8F1C-4B58-8F53-967451136F2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,9 +84,16 @@ Global
 		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2636D25-6601-43F0-B6A4-AF77B6E18C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA6119C-8F1C-4B58-8F53-967451136F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA6119C-8F1C-4B58-8F53-967451136F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA6119C-8F1C-4B58-8F53-967451136F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA6119C-8F1C-4B58-8F53-967451136F2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0CA6119C-8F1C-4B58-8F53-967451136F2C} = {1D63040A-3381-482F-BDB4-3817BACD82D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DB2DC7D-AB46-404B-BA8F-1D04099E8F9D}

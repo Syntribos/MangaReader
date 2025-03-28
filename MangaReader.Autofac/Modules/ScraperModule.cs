@@ -8,10 +8,8 @@ public class ScraperModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<ApiClient>()
-            .OnActivating(e => e.Instance.Init())
-            .SingleInstance();
-        builder.RegisterType<MangaDexScraper>().SingleInstance().As<IScraper>();
-        builder.RegisterType<ScraperProvider>().SingleInstance().As<IScraperProvider>();
+        builder.RegisterType<ApiClientProvider>().SingleInstance().AsImplementedInterfaces();
+        builder.RegisterType<MangaDexScraper>().SingleInstance().AsImplementedInterfaces();
+        builder.RegisterType<ScraperProvider>().SingleInstance().AsImplementedInterfaces();
     }
 }
