@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Scrapers\Scrapers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
